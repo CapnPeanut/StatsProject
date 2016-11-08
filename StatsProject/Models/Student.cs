@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ContosoUniversity.Models
+namespace StatsProject.Models
 {
     public class Student
     {

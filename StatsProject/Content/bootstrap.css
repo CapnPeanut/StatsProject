@@ -1669,7 +1669,7 @@ input[type="checkbox"] {
   margin-top: 1px \9;
   /* IE8-9 */
 
-  line-height: normal;
+  /*line-height: normal;
 }
 
 input[type="file"] {
