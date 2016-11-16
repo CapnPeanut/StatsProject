@@ -1,18 +1,18 @@
 ﻿namespace StatsProject.Models
 {
-    public enum Grade
+    public enum Outcome
     {
-        A, B, C, D, F
+        Win, Loss, Tie
     }
 
     public class Enrollment
     {
         public int EnrollmentID { get; set; }
-        public int CourseID { get; set; }
-        public int StudentID { get; set; }
-        public Grade? Grade { get; set; }
+        public int ActivityID { get; set; }
+        public int ParticipantID { get; set; }
+        public Outcome? Outcome { get; set; }
 
-        public virtual Course Course { get; set; }
-        public virtual Student Student { get; set; }
+        public virtual Activity Activity { get; set; }
+        public virtual Participant Participant { get; set; }
     }
 }

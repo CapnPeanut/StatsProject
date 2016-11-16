@@ -11,46 +11,50 @@ namespace StatsProject.DAL
     {
         protected override void Seed(SchoolContext context)
         {
-            var students = new List<Student>
+            var Participant = new List<Participant>
             {
-            new Student{FirstMidName="Carson",LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01")},
-            new Student{FirstMidName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01")},
-            new Student{FirstMidName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01")},
-            new Student{FirstMidName="Gytis",LastName="Barzdukas",EnrollmentDate=DateTime.Parse("2002-09-01")},
-            new Student{FirstMidName="Yan",LastName="Li",EnrollmentDate=DateTime.Parse("2002-09-01")},
-            new Student{FirstMidName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01")},
-            new Student{FirstMidName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01")},
-            new Student{FirstMidName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01")}
+            new Participant{FirstName="Carson",LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01"), Gender=Gender.Female},
+            new Participant{FirstName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Male},
+            new Participant{FirstName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01"), Gender= Gender.Male},
+            new Participant{FirstName="Gytis",LastName="Barzdukas",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Female},
+            new Participant{FirstName="Yan",LastName="Li",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Female},
+            new Participant{FirstName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01"), Gender=Gender.Female},
+            new Participant{FirstName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01"), Gender=Gender.Female},
+            new Participant{FirstName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01"), Gender=Gender.Female}
             };
 
-            students.ForEach(s => context.Students.Add(s));
+            Participant.ForEach(s => context.Participant.Add(s));
             context.SaveChanges();
-            var courses = new List<Course>
+            var Activitys = new List<Activity>
             {
-            new Course{CourseID=1050,Title="Chemistry",Credits=3,},
-            new Course{CourseID=4022,Title="Microeconomics",Credits=3,},
-            new Course{CourseID=4041,Title="Macroeconomics",Credits=3,},
-            new Course{CourseID=1045,Title="Calculus",Credits=4,},
-            new Course{CourseID=3141,Title="Trigonometry",Credits=4,},
-            new Course{CourseID=2021,Title="Composition",Credits=3,},
-            new Course{CourseID=2042,Title="Literature",Credits=4,}
+            new Activity{ActivityID=1050,Title="Chemistry",Points=3,},
+            new Activity{ActivityID=4022,Title="Microeconomics",Points=3,},
+            new Activity{ActivityID=4041,Title="Macroeconomics",Points=3,},
+            new Activity{ActivityID=1045,Title="Calculus",Points=4,},
+            new Activity{ActivityID=3141,Title="Trigonometry",Points=4,},
+            new Activity{ActivityID=2021,Title="Composition",Points=3,},
+            new Activity{ActivityID=2042,Title="Literature",Points=4,}
             };
-            courses.ForEach(s => context.Courses.Add(s));
+            Activitys.ForEach(s => context.Activitys.Add(s));
             context.SaveChanges();
             var enrollments = new List<Enrollment>
             {
-            new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},
-            new Enrollment{StudentID=1,CourseID=4022,Grade=Grade.C},
-            new Enrollment{StudentID=1,CourseID=4041,Grade=Grade.B},
-            new Enrollment{StudentID=2,CourseID=1045,Grade=Grade.B},
-            new Enrollment{StudentID=2,CourseID=3141,Grade=Grade.F},
-            new Enrollment{StudentID=2,CourseID=2021,Grade=Grade.F},
-            new Enrollment{StudentID=3,CourseID=1050},
-            new Enrollment{StudentID=4,CourseID=1050,},
-            new Enrollment{StudentID=4,CourseID=4022,Grade=Grade.F},
-            new Enrollment{StudentID=5,CourseID=4041,Grade=Grade.C},
-            new Enrollment{StudentID=6,CourseID=1045},
-            new Enrollment{StudentID=7,CourseID=3141,Grade=Grade.A},
+            new Enrollment{ParticipantID=1,ActivityID=1050,Outcome=Outcome.Win},
+            new Enrollment{ParticipantID=1,ActivityID=4022,Outcome=Outcome.Loss},
+            new Enrollment{ParticipantID=1,ActivityID=4041,Outcome=Outcome.Win},
+            new Enrollment{ParticipantID=2,ActivityID=1045,Outcome=Outcome.Tie},
+            new Enrollment{ParticipantID=2,ActivityID=3141,Outcome=Outcome.Win
+
+
+
+            },
+            new Enrollment{ParticipantID=2,ActivityID=2021,Outcome=Outcome.Win},
+            new Enrollment{ParticipantID=3,ActivityID=1050},
+            new Enrollment{ParticipantID=4,ActivityID=1050,},
+            new Enrollment{ParticipantID=4,ActivityID=4022,Outcome=Outcome.Loss},
+            new Enrollment{ParticipantID=5,ActivityID=4041,Outcome=Outcome.Loss},
+            new Enrollment{ParticipantID=6,ActivityID=1045},
+            new Enrollment{ParticipantID=7,ActivityID=3141,Outcome=Outcome.Tie},
             };
             enrollments.ForEach(s => context.Enrollments.Add(s));
             context.SaveChanges();
