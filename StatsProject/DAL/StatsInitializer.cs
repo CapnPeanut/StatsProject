@@ -7,12 +7,20 @@ using StatsProject.Models;
 
 namespace StatsProject.DAL
 {
-    public class SchoolInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<SchoolContext>
+    public class StatsInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<StatsContext>
     {
-        protected override void Seed(SchoolContext context)
+        protected override void Seed(StatsContext context)
         {
+
+
+
+
             // Seeding the database with initial information
             //adding gender, wins, and losses columns
+
+
+
+
             var Participant = new List<Participant>
             {
             new Participant{ParticipantId=1, FirstName="Jim",LastName="Bob",MembershipDate=DateTime.Parse("2005-08-03"), Gender=Gender.Female, NumberOfLosses=0, NumberOfWins=6},
@@ -24,6 +32,13 @@ namespace StatsProject.DAL
             new Participant{ParticipantId=7, FirstName="Marty",LastName="McFly",MembershipDate=DateTime.Parse("2003-03-26"), Gender=Gender.Female, NumberOfLosses=13, NumberOfWins=34},
             new Participant{ParticipantId=8, FirstName="Joe",LastName="Schmoe",MembershipDate=DateTime.Parse("2005-12-07"), Gender=Gender.Female, NumberOfLosses=23, NumberOfWins=25}
             };
+
+
+            // Future proofing.  Will add additional pages with speciifics for each individual once I'm comfotable with main stats page
+
+
+
+
 
             Participant.ForEach(s => context.Participant.Add(s));
             context.SaveChanges();

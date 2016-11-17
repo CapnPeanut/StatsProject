@@ -23,6 +23,12 @@ textarea {
     max-wMembershipIdth: 280px;
 }
 
+/* Gave the table a slight shade for better readability and darker text */
+
+
 .table {
     background-color: whitesmoke;
+    color: black;
 }
+
+/*  */

@@ -4,10 +4,10 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace StatsProject.DAL
 {
-    public class SchoolContext : DbContext
+    public class StatsContext : DbContext
     {
-
-        public SchoolContext() : base("SchoolContext")
+        // Simply initializing getters and setters for the database
+        public StatsContext() : base("StatsContext")
         {
         }
 

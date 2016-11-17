@@ -13,12 +13,13 @@ namespace StatsProject.Controllers
 {
     public class ParticipantController : Controller
     {
-        private SchoolContext db = new SchoolContext();
+        private StatsContext db = new StatsContext();
 
         // GET: Participant
         public ActionResult Index()
         {
             return View(db.Participant.ToList());
+            
         }
 
         // GET: Participant/Details/5

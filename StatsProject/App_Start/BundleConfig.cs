@@ -22,7 +22,7 @@ namespace StatsProject
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
-
+            // Added SpaceLab bootswatch for a speciifc them layout
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/spaceLab.bootstrap.css",
                       "~/Content/site.css"));
