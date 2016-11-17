@@ -4,14 +4,19 @@
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+ @*Updated address*@
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+    Brian Atchley<br />
+    444 Example Road<br />
+    Louisville, Ky 40215<br />
+   
+</address>
+
+@*Added glyphicons and made information clickable*@ 
+
+<address>
+    <strong><span class="glyphicon glyphicon-envelope"> </span>    Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong><span class="glyphicon glyphicon-envelope"> </span>    Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a><br />
+    <abbr title="Phone"></abbr><span class="glyphicon glyphicon-phone-alt"> </span><strong>    Phone </strong><a href="tel:+1-800-555-5555">Call 1-800-555-5555</a>  
 </address>
