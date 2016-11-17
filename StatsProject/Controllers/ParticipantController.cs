@@ -47,7 +47,7 @@ namespace StatsProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,EnrollmentDate,Gender")] Participant participant)
+        public ActionResult Create([Bind(Include = "ID,LastName,FirstName,EnrollmentDate,Gender,NumberOfWins,NumberOfLosses")] Participant participant)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace StatsProject.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,EnrollmentDate,Gender")] Participant participant)
+        public ActionResult Edit([Bind(Include = "ID,LastName,FirstName,EnrollmentDate,Gender,NumberOfWins,NumberOfLosses")] Participant participant)
         {
             if (ModelState.IsValid)
             {

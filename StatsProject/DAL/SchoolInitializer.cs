@@ -25,7 +25,7 @@ namespace StatsProject.DAL
 
             Participant.ForEach(s => context.Participant.Add(s));
             context.SaveChanges();
-            var Activitys = new List<Activity>
+            var Activities = new List<Activity>
             {
             new Activity{ActivityID=1050,Title="Chemistry",Points=3,},
             new Activity{ActivityID=4022,Title="Microeconomics",Points=3,},
@@ -35,26 +35,26 @@ namespace StatsProject.DAL
             new Activity{ActivityID=2021,Title="Composition",Points=3,},
             new Activity{ActivityID=2042,Title="Literature",Points=4,}
             };
-            Activitys.ForEach(s => context.Activitys.Add(s));
+            Activities.ForEach(s => context.Activities.Add(s));
             context.SaveChanges();
             var enrollments = new List<Enrollment>
             {
-            new Enrollment{ParticipantID=1,ActivityID=1050,Outcome=Outcome.Win},
-            new Enrollment{ParticipantID=1,ActivityID=4022,Outcome=Outcome.Loss},
-            new Enrollment{ParticipantID=1,ActivityID=4041,Outcome=Outcome.Win},
-            new Enrollment{ParticipantID=2,ActivityID=1045,Outcome=Outcome.Tie},
-            new Enrollment{ParticipantID=2,ActivityID=3141,Outcome=Outcome.Win
+            new Enrollment{ParticipantID=1,ActivityID=1050,},
+            new Enrollment{ParticipantID=1,ActivityID=4022,},
+            new Enrollment{ParticipantID=1,ActivityID=4041,},
+            new Enrollment{ParticipantID=2,ActivityID=1045,},
+            new Enrollment{ParticipantID=2,ActivityID=3141,
 
 
 
             },
-            new Enrollment{ParticipantID=2,ActivityID=2021,Outcome=Outcome.Win},
+            new Enrollment{ParticipantID=2,ActivityID=2021,},
             new Enrollment{ParticipantID=3,ActivityID=1050},
             new Enrollment{ParticipantID=4,ActivityID=1050,},
-            new Enrollment{ParticipantID=4,ActivityID=4022,Outcome=Outcome.Loss},
-            new Enrollment{ParticipantID=5,ActivityID=4041,Outcome=Outcome.Loss},
+            new Enrollment{ParticipantID=4,ActivityID=4022},
+            new Enrollment{ParticipantID=5,ActivityID=4041,},
             new Enrollment{ParticipantID=6,ActivityID=1045},
-            new Enrollment{ParticipantID=7,ActivityID=3141,Outcome=Outcome.Tie},
+            new Enrollment{ParticipantID=7,ActivityID=3141,},
             };
             enrollments.ForEach(s => context.Enrollments.Add(s));
             context.SaveChanges();

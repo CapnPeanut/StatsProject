@@ -13,7 +13,7 @@ namespace StatsProject.DAL
 
         public DbSet<Participant> Participant { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
-        public DbSet<Activity> Activitys { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

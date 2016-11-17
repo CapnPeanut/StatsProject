@@ -12,16 +12,23 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.EnrollmentDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfWins)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfLosses)
         </th>
         <th></th>
     </tr>
@@ -39,6 +46,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfWins)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfLosses)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
