@@ -22,3 +22,7 @@ select,
 textarea {
     max-wMembershipIdth: 280px;
 }
+
+.table {
+    background-color: whitesmoke;
+}
