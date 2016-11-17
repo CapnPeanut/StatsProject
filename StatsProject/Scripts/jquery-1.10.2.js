@@ -57,16 +57,16 @@ var
 	// [[Class]] -> type pairs
 	class2type = {},
 
-	// List of deleted data cache ids, so we can reuse them
-	core_deletedIds = [],
+	// List of deleted data cache MembershipIds, so we can reuse them
+	core_deletedMembershipIds = [],
 
 	core_version = "1.10.2",
 
 	// Save a reference to some core methods
-	core_concat = core_deletedIds.concat,
-	core_push = core_deletedIds.push,
-	core_slice = core_deletedIds.slice,
-	core_indexOf = core_deletedIds.indexOf,
+	core_concat = core_deletedMembershipIds.concat,
+	core_push = core_deletedMembershipIds.push,
+	core_slice = core_deletedMembershipIds.slice,
+	core_indexOf = core_deletedMembershipIds.indexOf,
 	core_toString = class2type.toString,
 	core_hasOwn = class2type.hasOwnProperty,
 	core_trim = core_version.trim,
@@ -87,7 +87,7 @@ var
 	rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,
 
 	// A simple way to check for HTML strings
-	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
+	// Prioritize #MembershipId over <tag> to avoMembershipId XSS via location.hash (#9521)
 	// Strict HTML recognition (#11290: must start with <)
 	rquickExpr = /^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,
 
@@ -95,10 +95,10 @@ var
 	rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>|)$/,
 
 	// JSON RegExp
-	rvalidchars = /^[\],:{}\s]*$/,
-	rvalidbraces = /(?:^|:|,)(?:\s*\[)+/g,
-	rvalidescape = /\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g,
-	rvalidtokens = /"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g,
+	rvalMembershipIdchars = /^[\],:{}\s]*$/,
+	rvalMembershipIdbraces = /(?:^|:|,)(?:\s*\[)+/g,
+	rvalMembershipIdescape = /\\(?:["\\\/bfnrt]|u[\da-fA-F]{4})/g,
+	rvalMembershipIdtokens = /"[^"\\\r\n]*"|true|false|null|-?(?:\d+\.|)\d+(?:[eE][+-]?\d+|)/g,
 
 	// Matches dashed string for camelizing
 	rmsPrefix = /^-ms-/,
@@ -153,7 +153,7 @@ jQuery.fn = jQuery.prototype = {
 				match = rquickExpr.exec( selector );
 			}
 
-			// Match html or make sure no context is specified for #id
+			// Match html or make sure no context is specified for #MembershipId
 			if ( match && (match[1] || !context) ) {
 
 				// HANDLE: $(html) -> $(array)
@@ -183,16 +183,16 @@ jQuery.fn = jQuery.prototype = {
 
 					return this;
 
-				// HANDLE: $(#id)
+				// HANDLE: $(#MembershipId)
 				} else {
-					elem = document.getElementById( match[2] );
+					elem = document.getElementByMembershipId( match[2] );
 
 					// Check parentNode to catch when Blackberry 4.6 returns
 					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Handle the case where IE and Opera return items
-						// by name instead of ID
-						if ( elem.id !== match[2] ) {
+						// by name instead of MembershipId
+						if ( elem.MembershipId !== match[2] ) {
 							return rootjQuery.find( selector );
 						}
 
@@ -576,16 +576,16 @@ jQuery.extend({
 			if ( data ) {
 				// Make sure the incoming data is actual JSON
 				// Logic borrowed from http://json.org/json2.js
-				if ( rvalidchars.test( data.replace( rvalidescape, "@" )
-					.replace( rvalidtokens, "]" )
-					.replace( rvalidbraces, "")) ) {
+				if ( rvalMembershipIdchars.test( data.replace( rvalMembershipIdescape, "@" )
+					.replace( rvalMembershipIdtokens, "]" )
+					.replace( rvalMembershipIdbraces, "")) ) {
 
 					return ( new Function( "return " + data ) )();
 				}
 			}
 		}
 
-		jQuery.error( "Invalid JSON: " + data );
+		jQuery.error( "InvalMembershipId JSON: " + data );
 	},
 
 	// Cross-browser xml parsing
@@ -607,7 +607,7 @@ jQuery.extend({
 			xml = undefined;
 		}
 		if ( !xml || !xml.documentElement || xml.getElementsByTagName( "parsererror" ).length ) {
-			jQuery.error( "Invalid XML: " + data );
+			jQuery.error( "InvalMembershipId XML: " + data );
 		}
 		return xml;
 	},
@@ -771,7 +771,7 @@ jQuery.extend({
 		inv = !!inv;
 
 		// Go through the array, only saving the items
-		// that pass the validator function
+		// that pass the valMembershipIdator function
 		for ( ; i < length; i++ ) {
 			retVal = !!callback( elems[ i ], i );
 			if ( inv !== retVal ) {
@@ -815,8 +815,8 @@ jQuery.extend({
 		return core_concat.apply( [], ret );
 	},
 
-	// A global GUID counter for objects
-	guid: 1,
+	// A global GUMembershipId counter for objects
+	guMembershipId: 1,
 
 	// Bind a function to a context, optionally partially applying any
 	// arguments.
@@ -841,8 +841,8 @@ jQuery.extend({
 			return fn.apply( context || this, args.concat( core_slice.call( arguments ) ) );
 		};
 
-		// Set the guid of unique handler to the same of original handler, so it can be removed
-		proxy.guid = fn.guid = fn.guid || jQuery.guid++;
+		// Set the guMembershipId of unique handler to the same of original handler, so it can be removed
+		proxy.guMembershipId = fn.guMembershipId = fn.guMembershipId || jQuery.guMembershipId++;
 
 		return proxy;
 	},
@@ -1085,7 +1085,7 @@ var i,
 		return -1;
 	},
 
-	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
+	booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hMembershipIdden|ismap|loop|multiple|open|readonly|required|scoped",
 
 	// Regular expressions
 
@@ -1094,14 +1094,14 @@ var i,
 	// http://www.w3.org/TR/css3-syntax/#characters
 	characterEncoding = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",
 
-	// Loosely modeled on CSS identifier characters
-	// An unquoted value should be a CSS identifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
-	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
-	identifier = characterEncoding.replace( "w", "w#" ),
+	// Loosely modeled on CSS MembershipIdentifier characters
+	// An unquoted value should be a CSS MembershipIdentifier http://www.w3.org/TR/css3-selectors/#attribute-selectors
+	// Proper syntax: http://www.w3.org/TR/CSS21/syndata.html#value-def-MembershipIdentifier
+	MembershipIdentifier = characterEncoding.replace( "w", "w#" ),
 
 	// Acceptable operators http://www.w3.org/TR/selectors/#attribute-selectors
 	attributes = "\\[" + whitespace + "*(" + characterEncoding + ")" + whitespace +
-		"*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + identifier + ")|)|)" + whitespace + "*\\]",
+		"*(?:([*^$|!~]?=)" + whitespace + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + MembershipIdentifier + ")|)|)" + whitespace + "*\\]",
 
 	// Prefer arguments quoted,
 	//   then not containing pseudos/brackets,
@@ -1121,10 +1121,10 @@ var i,
 	rattributeQuotes = new RegExp( "=" + whitespace + "*([^\\]'\"]*)" + whitespace + "*\\]", "g" ),
 
 	rpseudo = new RegExp( pseudos ),
-	ridentifier = new RegExp( "^" + identifier + "$" ),
+	rMembershipIdentifier = new RegExp( "^" + MembershipIdentifier + "$" ),
 
 	matchExpr = {
-		"ID": new RegExp( "^#(" + characterEncoding + ")" ),
+		"MembershipId": new RegExp( "^#(" + characterEncoding + ")" ),
 		"CLASS": new RegExp( "^\\.(" + characterEncoding + ")" ),
 		"TAG": new RegExp( "^(" + characterEncoding.replace( "w", "w*" ) + ")" ),
 		"ATTR": new RegExp( "^" + attributes ),
@@ -1141,7 +1141,7 @@ var i,
 
 	rnative = /^[^{]+\{\s*\[native \w/,
 
-	// Easily-parseable/retrievable ID or TAG or CLASS selectors
+	// Easily-parseable/retrievable MembershipId or TAG or CLASS selectors
 	rquickExpr = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,
 
 	rinputs = /^(?:input|select|textarea|button)$/i,
@@ -1171,7 +1171,7 @@ try {
 		(arr = slice.call( preferredDoc.childNodes )),
 		preferredDoc.childNodes
 	);
-	// Support: Android<4.0
+	// Support: AndroMembershipId<4.0
 	// Detect silently failing push.apply
 	arr[ preferredDoc.childNodes.length ].nodeType;
 } catch ( e ) {
@@ -1197,7 +1197,7 @@ try {
 function Sizzle( selector, context, results, seed ) {
 	var match, elem, m, nodeType,
 		// QSA vars
-		i, groups, old, nid, newContext, newSelector;
+		i, groups, old, nMembershipId, newContext, newSelector;
 
 	if ( ( context ? context.ownerDocument || context : preferredDoc ) !== document ) {
 		setDocument( context );
@@ -1218,16 +1218,16 @@ function Sizzle( selector, context, results, seed ) {
 
 		// Shortcuts
 		if ( (match = rquickExpr.exec( selector )) ) {
-			// Speed-up: Sizzle("#ID")
+			// Speed-up: Sizzle("#MembershipId")
 			if ( (m = match[1]) ) {
 				if ( nodeType === 9 ) {
-					elem = context.getElementById( m );
+					elem = context.getElementByMembershipId( m );
 					// Check parentNode to catch when Blackberry 4.6 returns
 					// nodes that are no longer in the document #6963
 					if ( elem && elem.parentNode ) {
 						// Handle the case where IE, Opera, and Webkit return items
-						// by name instead of ID
-						if ( elem.id === m ) {
+						// by name instead of MembershipId
+						if ( elem.MembershipId === m ) {
 							results.push( elem );
 							return results;
 						}
@@ -1236,8 +1236,8 @@ function Sizzle( selector, context, results, seed ) {
 					}
 				} else {
 					// Context is not a document
-					if ( context.ownerDocument && (elem = context.ownerDocument.getElementById( m )) &&
-						contains( context, elem ) && elem.id === m ) {
+					if ( context.ownerDocument && (elem = context.ownerDocument.getElementByMembershipId( m )) &&
+						contains( context, elem ) && elem.MembershipId === m ) {
 						results.push( elem );
 						return results;
 					}
@@ -1257,27 +1257,27 @@ function Sizzle( selector, context, results, seed ) {
 
 		// QSA path
 		if ( support.qsa && (!rbuggyQSA || !rbuggyQSA.test( selector )) ) {
-			nid = old = expando;
+			nMembershipId = old = expando;
 			newContext = context;
 			newSelector = nodeType === 9 && selector;
 
 			// qSA works strangely on Element-rooted queries
-			// We can work around this by specifying an extra ID on the root
+			// We can work around this by specifying an extra MembershipId on the root
 			// and working up from there (Thanks to Andrew Dupont for the technique)
 			// IE 8 doesn't work on object elements
 			if ( nodeType === 1 && context.nodeName.toLowerCase() !== "object" ) {
 				groups = tokenize( selector );
 
-				if ( (old = context.getAttribute("id")) ) {
-					nid = old.replace( rescape, "\\$&" );
+				if ( (old = context.getAttribute("MembershipId")) ) {
+					nMembershipId = old.replace( rescape, "\\$&" );
 				} else {
-					context.setAttribute( "id", nid );
+					context.setAttribute( "MembershipId", nMembershipId );
 				}
-				nid = "[id='" + nid + "'] ";
+				nMembershipId = "[MembershipId='" + nMembershipId + "'] ";
 
 				i = groups.length;
 				while ( i-- ) {
-					groups[i] = nid + toSelector( groups[i] );
+					groups[i] = nMembershipId + toSelector( groups[i] );
 				}
 				newContext = rsibling.test( selector ) && context.parentNode || context;
 				newSelector = groups.join(",");
@@ -1292,7 +1292,7 @@ function Sizzle( selector, context, results, seed ) {
 				} catch(qsaError) {
 				} finally {
 					if ( !old ) {
-						context.removeAttribute("id");
+						context.removeAttribute("MembershipId");
 					}
 				}
 			}
@@ -1313,7 +1313,7 @@ function createCache() {
 	var keys = [];
 
 	function cache( key, value ) {
-		// Use (key + " ") to avoid collision with native prototype properties (see Issue #157)
+		// Use (key + " ") to avoMembershipId collision with native prototype properties (see Issue #157)
 		if ( keys.push( key += " " ) > Expr.cacheLength ) {
 			// Only keep the most recent entries
 			delete cache[ keys.shift() ];
@@ -1517,40 +1517,40 @@ setDocument = Sizzle.setDocument = function( node ) {
 	});
 
 	// Support: IE<10
-	// Check if getElementById returns elements by name
-	// The broken getElementById methods don't pick up programatically-set names,
+	// Check if getElementByMembershipId returns elements by name
+	// The broken getElementByMembershipId methods don't pick up programatically-set names,
 	// so use a roundabout getElementsByName test
-	support.getById = assert(function( div ) {
-		docElem.appendChild( div ).id = expando;
+	support.getByMembershipId = assert(function( div ) {
+		docElem.appendChild( div ).MembershipId = expando;
 		return !doc.getElementsByName || !doc.getElementsByName( expando ).length;
 	});
 
-	// ID find and filter
-	if ( support.getById ) {
-		Expr.find["ID"] = function( id, context ) {
-			if ( typeof context.getElementById !== strundefined && documentIsHTML ) {
-				var m = context.getElementById( id );
+	// MembershipId find and filter
+	if ( support.getByMembershipId ) {
+		Expr.find["MembershipId"] = function( MembershipId, context ) {
+			if ( typeof context.getElementByMembershipId !== strundefined && documentIsHTML ) {
+				var m = context.getElementByMembershipId( MembershipId );
 				// Check parentNode to catch when Blackberry 4.6 returns
 				// nodes that are no longer in the document #6963
 				return m && m.parentNode ? [m] : [];
 			}
 		};
-		Expr.filter["ID"] = function( id ) {
-			var attrId = id.replace( runescape, funescape );
+		Expr.filter["MembershipId"] = function( MembershipId ) {
+			var attrMembershipId = MembershipId.replace( runescape, funescape );
 			return function( elem ) {
-				return elem.getAttribute("id") === attrId;
+				return elem.getAttribute("MembershipId") === attrMembershipId;
 			};
 		};
 	} else {
 		// Support: IE6/7
-		// getElementById is not reliable as a find shortcut
-		delete Expr.find["ID"];
+		// getElementByMembershipId is not reliable as a find shortcut
+		delete Expr.find["MembershipId"];
 
-		Expr.filter["ID"] =  function( id ) {
-			var attrId = id.replace( runescape, funescape );
+		Expr.filter["MembershipId"] =  function( MembershipId ) {
+			var attrMembershipId = MembershipId.replace( runescape, funescape );
 			return function( elem ) {
-				var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("id");
-				return node && node.value === attrId;
+				var node = typeof elem.getAttributeNode !== strundefined && elem.getAttributeNode("MembershipId");
+				return node && node.value === attrMembershipId;
 			};
 		};
 	}
@@ -1599,7 +1599,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// qSa(:focus) reports false when true (Chrome 21)
 	// We allow this because of a bug in IE8/9 that throws an error
 	// whenever `document.activeElement` is accessed on an iframe
-	// So, we allow :focus to pass through QSA all the time to avoid the IE error
+	// So, we allow :focus to pass through QSA all the time to avoMembershipId the IE error
 	// See http://bugs.jquery.com/ticket/13378
 	rbuggyQSA = [];
 
@@ -1636,20 +1636,20 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// Support: Windows 8 Native Apps
 			// The type attribute is restricted during .innerHTML assignment
 			var input = doc.createElement("input");
-			input.setAttribute( "type", "hidden" );
+			input.setAttribute( "type", "hMembershipIdden" );
 			div.appendChild( input ).setAttribute( "t", "" );
 
 			if ( div.querySelectorAll("[t^='']").length ) {
 				rbuggyQSA.push( "[*^$]=" + whitespace + "*(?:''|\"\")" );
 			}
 
-			// FF 3.5 - :enabled/:disabled and hidden elements (hidden elements are still enabled)
+			// FF 3.5 - :enabled/:disabled and hMembershipIdden elements (hMembershipIdden elements are still enabled)
 			// IE8 throws error here and will not see later tests
 			if ( !div.querySelectorAll(":enabled").length ) {
 				rbuggyQSA.push( ":enabled", ":disabled" );
 			}
 
-			// Opera 10-11 does not throw on post-comma invalid pseudos
+			// Opera 10-11 does not throw on post-comma invalMembershipId pseudos
 			div.querySelectorAll("*,:x");
 			rbuggyQSA.push(",.*:");
 		});
@@ -1750,7 +1750,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			ap = [ a ],
 			bp = [ b ];
 
-		// Exit early if the nodes are identical
+		// Exit early if the nodes are MembershipIdentical
 		if ( a === b ) {
 			hasDuplicate = true;
 			return 0;
@@ -1820,7 +1820,7 @@ Sizzle.matchesSelector = function( elem, expr ) {
 
 			// IE 9's matchesSelector returns false on disconnected nodes
 			if ( ret || support.disconnectedMatch ||
-					// As well, disconnected nodes are said to be in a document
+					// As well, disconnected nodes are saMembershipId to be in a document
 					// fragment in IE 9
 					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
@@ -2178,12 +2178,12 @@ Expr = Sizzle.selectors = {
 				args = [ pseudo, pseudo, "", argument ];
 				return Expr.setFilters.hasOwnProperty( pseudo.toLowerCase() ) ?
 					markFunction(function( seed, matches ) {
-						var idx,
+						var MembershipIdx,
 							matched = fn( seed, argument ),
 							i = matched.length;
 						while ( i-- ) {
-							idx = indexOf.call( seed, matched[i] );
-							seed[ idx ] = !( matches[ idx ] = matched[i] );
+							MembershipIdx = indexOf.call( seed, matched[i] );
+							seed[ MembershipIdx ] = !( matches[ MembershipIdx ] = matched[i] );
 						}
 					}) :
 					function( elem ) {
@@ -2199,7 +2199,7 @@ Expr = Sizzle.selectors = {
 		// Potentially complex pseudos
 		"not": markFunction(function( selector ) {
 			// Trim the selector passed to compile
-			// to avoid treating leading and trailing
+			// to avoMembershipId treating leading and trailing
 			// spaces as combinators
 			var input = [],
 				results = [],
@@ -2239,14 +2239,14 @@ Expr = Sizzle.selectors = {
 
 		// "Whether an element is represented by a :lang() selector
 		// is based solely on the element's language value
-		// being equal to the identifier C,
-		// or beginning with the identifier C immediately followed by "-".
+		// being equal to the MembershipIdentifier C,
+		// or beginning with the MembershipIdentifier C immediately followed by "-".
 		// The matching of C against the element's language value is performed case-insensitively.
-		// The identifier C does not have to be a valid language name."
+		// The MembershipIdentifier C does not have to be a valMembershipId language name."
 		// http://www.w3.org/TR/selectors/#lang-pseudo
 		"lang": markFunction( function( lang ) {
-			// lang value must be a valid identifier
-			if ( !ridentifier.test(lang || "") ) {
+			// lang value must be a valMembershipId MembershipIdentifier
+			if ( !rMembershipIdentifier.test(lang || "") ) {
 				Sizzle.error( "unsupported lang: " + lang );
 			}
 			lang = lang.replace( runescape, funescape ).toLowerCase();
@@ -2268,7 +2268,7 @@ Expr = Sizzle.selectors = {
 		// Miscellaneous
 		"target": function( elem ) {
 			var hash = window.location && window.location.hash;
-			return hash && hash.slice( 1 ) === elem.id;
+			return hash && hash.slice( 1 ) === elem.MembershipId;
 		},
 
 		"root": function( elem ) {
@@ -2427,7 +2427,7 @@ function tokenize( selector, parseOnly ) {
 		// Comma and first run
 		if ( !matched || (match = rcomma.exec( soFar )) ) {
 			if ( match ) {
-				// Don't consume trailing commas as valid
+				// Don't consume trailing commas as valMembershipId
 				soFar = soFar.slice( match[0].length ) || soFar;
 			}
 			groups.push( tokens = [] );
@@ -2465,7 +2465,7 @@ function tokenize( selector, parseOnly ) {
 		}
 	}
 
-	// Return the length of the invalid excess
+	// Return the length of the invalMembershipId excess
 	// if we're just parsing
 	// Otherwise, throw an error or return tokens
 	return parseOnly ?
@@ -2806,7 +2806,7 @@ function matcherFromGroupMatchers( elementMatchers, setMatchers ) {
 				}
 			}
 
-			// Override manipulation of globals by nested matchers
+			// OverrMembershipIde manipulation of globals by nested matchers
 			if ( outermost ) {
 				dirruns = dirrunsUnique;
 				outermostContext = contextBackup;
@@ -2864,13 +2864,13 @@ function select( selector, context, results, seed ) {
 		// Try to minimize operations if there is only one group
 		if ( match.length === 1 ) {
 
-			// Take a shortcut and set the context if the root selector is an ID
+			// Take a shortcut and set the context if the root selector is an MembershipId
 			tokens = match[0] = match[0].slice( 0 );
-			if ( tokens.length > 2 && (token = tokens[0]).type === "ID" &&
-					support.getById && context.nodeType === 9 && documentIsHTML &&
+			if ( tokens.length > 2 && (token = tokens[0]).type === "MembershipId" &&
+					support.getByMembershipId && context.nodeType === 9 && documentIsHTML &&
 					Expr.relative[ tokens[1].type ] ) {
 
-				context = ( Expr.find["ID"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
+				context = ( Expr.find["MembershipId"]( token.matches[0].replace(runescape, funescape), context ) || [] )[0];
 				if ( !context ) {
 					return results;
 				}
@@ -2909,7 +2909,7 @@ function select( selector, context, results, seed ) {
 	}
 
 	// Compile and execute a filtering function
-	// Provide `match` to avoid retokenization if we modified the selector above
+	// ProvMembershipIde `match` to avoMembershipId retokenization if we modified the selector above
 	compile( selector, match )(
 		seed,
 		context,
@@ -2946,7 +2946,7 @@ if ( !assert(function( div ) {
 	div.innerHTML = "<a href='#'></a>";
 	return div.firstChild.getAttribute("href") === "#" ;
 }) ) {
-	addHandle( "type|href|height|width", function( elem, name, isXML ) {
+	addHandle( "type|href|height|wMembershipIdth", function( elem, name, isXML ) {
 		if ( !isXML ) {
 			return elem.getAttribute( name, name.toLowerCase() === "type" ? 1 : 2 );
 		}
@@ -3230,7 +3230,7 @@ jQuery.extend({
 					}).promise();
 				},
 				// Get a promise for this deferred
-				// If obj is provided, the promise aspect is added to the object
+				// If obj is provMembershipIded, the promise aspect is added to the object
 				promise: function( obj ) {
 					return obj != null ? jQuery.extend( obj, promise ) : promise;
 				}
@@ -3411,7 +3411,7 @@ jQuery.support = (function( support ) {
 	input.checked = true;
 	support.noCloneChecked = input.cloneNode( true ).checked;
 
-	// Make sure that the options inside disabled selects aren't marked as disabled
+	// Make sure that the options insMembershipIde disabled selects aren't marked as disabled
 	// (WebKit marks them as disabled)
 	select.disabled = true;
 	support.optDisabled = !opt.disabled;
@@ -3489,17 +3489,17 @@ jQuery.support = (function( support ) {
 		}
 
 		container = document.createElement("div");
-		container.style.cssText = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px";
+		container.style.cssText = "border:0;wMembershipIdth:0;height:0;position:absolute;top:0;left:-9999px;margin-top:1px";
 
 		body.appendChild( container ).appendChild( div );
 
 		// Support: IE8
-		// Check if table cells still have offsetWidth/Height when they are set
+		// Check if table cells still have offsetWMembershipIdth/Height when they are set
 		// to display:none and there are still other visible table cells in a
-		// table row; if so, offsetWidth/Height are not reliable for use when
-		// determining if an element has been hidden directly using
+		// table row; if so, offsetWMembershipIdth/Height are not reliable for use when
+		// determining if an element has been hMembershipIdden directly using
 		// display:none (it is still safe to use offsets if a parent element is
-		// hidden; don safety goggles and see bug #4512 for more information).
+		// hMembershipIdden; don safety goggles and see bug #4512 for more information).
 		div.innerHTML = "<table><tr><td></td><td>t</td></tr></table>";
 		tds = div.getElementsByTagName("td");
 		tds[ 0 ].style.cssText = "padding:0;margin:0;border:0;display:none";
@@ -3509,32 +3509,32 @@ jQuery.support = (function( support ) {
 		tds[ 1 ].style.display = "none";
 
 		// Support: IE8
-		// Check if empty table cells still have offsetWidth/Height
-		support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
+		// Check if empty table cells still have offsetWMembershipIdth/Height
+		support.reliableHMembershipIddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
 
 		// Check box-sizing and margin behavior.
 		div.innerHTML = "";
-		div.style.cssText = "box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;padding:1px;border:1px;display:block;width:4px;margin-top:1%;position:absolute;top:1%;";
+		div.style.cssText = "box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;padding:1px;border:1px;display:block;wMembershipIdth:4px;margin-top:1%;position:absolute;top:1%;";
 
-		// Workaround failing boxSizing test due to offsetWidth returning wrong value
+		// Workaround failing boxSizing test due to offsetWMembershipIdth returning wrong value
 		// with some non-1 values of body zoom, ticket #13543
 		jQuery.swap( body, body.style.zoom != null ? { zoom: 1 } : {}, function() {
-			support.boxSizing = div.offsetWidth === 4;
+			support.boxSizing = div.offsetWMembershipIdth === 4;
 		});
 
 		// Use window.getComputedStyle because jsdom on node.js will break without it.
 		if ( window.getComputedStyle ) {
 			support.pixelPosition = ( window.getComputedStyle( div, null ) || {} ).top !== "1%";
-			support.boxSizingReliable = ( window.getComputedStyle( div, null ) || { width: "4px" } ).width === "4px";
+			support.boxSizingReliable = ( window.getComputedStyle( div, null ) || { wMembershipIdth: "4px" } ).wMembershipIdth === "4px";
 
-			// Check if div with explicit width and no margin-right incorrectly
-			// gets computed margin-right based on width of container. (#3333)
+			// Check if div with explicit wMembershipIdth and no margin-right incorrectly
+			// gets computed margin-right based on wMembershipIdth of container. (#3333)
 			// Fails in WebKit before Feb 2011 nightlies
 			// WebKit Bug 13343 - getComputedStyle returns wrong value for margin-right
 			marginDiv = div.appendChild( document.createElement("div") );
 			marginDiv.style.cssText = div.style.cssText = divReset;
-			marginDiv.style.marginRight = marginDiv.style.width = "0";
-			div.style.width = "1px";
+			marginDiv.style.marginRight = marginDiv.style.wMembershipIdth = "0";
+			div.style.wMembershipIdth = "1px";
 
 			support.reliableMarginRight =
 				!parseFloat( ( window.getComputedStyle( marginDiv, null ) || {} ).marginRight );
@@ -3546,15 +3546,15 @@ jQuery.support = (function( support ) {
 			// elements when setting their display to 'inline' and giving
 			// them layout
 			div.innerHTML = "";
-			div.style.cssText = divReset + "width:1px;padding:1px;display:inline;zoom:1";
-			support.inlineBlockNeedsLayout = ( div.offsetWidth === 3 );
+			div.style.cssText = divReset + "wMembershipIdth:1px;padding:1px;display:inline;zoom:1";
+			support.inlineBlockNeedsLayout = ( div.offsetWMembershipIdth === 3 );
 
 			// Support: IE6
 			// Check if elements with layout shrink-wrap their children
 			div.style.display = "block";
 			div.innerHTML = "<div></div>";
-			div.firstChild.style.width = "5px";
-			support.shrinkWrapBlocks = ( div.offsetWidth !== 3 );
+			div.firstChild.style.wMembershipIdth = "5px";
+			support.shrinkWrapBlocks = ( div.offsetWMembershipIdth !== 3 );
 
 			if ( support.inlineBlockNeedsLayout ) {
 				// Prevent IE 6 from affecting layout for positioned elements #11048
@@ -3566,18 +3566,18 @@ jQuery.support = (function( support ) {
 
 		body.removeChild( container );
 
-		// Null elements to avoid leaks in IE
+		// Null elements to avoMembershipId leaks in IE
 		container = div = tds = marginDiv = null;
 	});
 
-	// Null elements to avoid leaks in IE
+	// Null elements to avoMembershipId leaks in IE
 	all = select = fragment = opt = a = input = null;
 
 	return support;
 })({});
 
 var rbrace = /(?:\{[\s\S]*\}|\[[\s\S]*\])$/,
-	rmultiDash = /([A-Z])/g;
+	rmultMembershipIdash = /([A-Z])/g;
 
 function internalData( elem, name, data, pvt /* Internal Use Only */ ){
 	if ( !jQuery.acceptData( elem ) ) {
@@ -3595,46 +3595,46 @@ function internalData( elem, name, data, pvt /* Internal Use Only */ ){
 		// attached directly to the object so GC can occur automatically
 		cache = isNode ? jQuery.cache : elem,
 
-		// Only defining an ID for JS objects if its cache already exists allows
+		// Only defining an MembershipId for JS objects if its cache already exists allows
 		// the code to shortcut on the same path as a DOM node with no cache
-		id = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey;
+		MembershipId = isNode ? elem[ internalKey ] : elem[ internalKey ] && internalKey;
 
-	// Avoid doing any more work than we need to when trying to get data on an
+	// AvoMembershipId doing any more work than we need to when trying to get data on an
 	// object that has no data at all
-	if ( (!id || !cache[id] || (!pvt && !cache[id].data)) && data === undefined && typeof name === "string" ) {
+	if ( (!MembershipId || !cache[MembershipId] || (!pvt && !cache[MembershipId].data)) && data === undefined && typeof name === "string" ) {
 		return;
 	}
 
-	if ( !id ) {
-		// Only DOM nodes need a new unique ID for each element since their data
+	if ( !MembershipId ) {
+		// Only DOM nodes need a new unique MembershipId for each element since their data
 		// ends up in the global cache
 		if ( isNode ) {
-			id = elem[ internalKey ] = core_deletedIds.pop() || jQuery.guid++;
+			MembershipId = elem[ internalKey ] = core_deletedMembershipIds.pop() || jQuery.guMembershipId++;
 		} else {
-			id = internalKey;
+			MembershipId = internalKey;
 		}
 	}
 
-	if ( !cache[ id ] ) {
-		// Avoid exposing jQuery metadata on plain JS objects when the object
+	if ( !cache[ MembershipId ] ) {
+		// AvoMembershipId exposing jQuery metadata on plain JS objects when the object
 		// is serialized using JSON.stringify
-		cache[ id ] = isNode ? {} : { toJSON: jQuery.noop };
+		cache[ MembershipId ] = isNode ? {} : { toJSON: jQuery.noop };
 	}
 
 	// An object can be passed to jQuery.data instead of a key/value pair; this gets
 	// shallow copied over onto the existing cache
 	if ( typeof name === "object" || typeof name === "function" ) {
 		if ( pvt ) {
-			cache[ id ] = jQuery.extend( cache[ id ], name );
+			cache[ MembershipId ] = jQuery.extend( cache[ MembershipId ], name );
 		} else {
-			cache[ id ].data = jQuery.extend( cache[ id ].data, name );
+			cache[ MembershipId ].data = jQuery.extend( cache[ MembershipId ].data, name );
 		}
 	}
 
-	thisCache = cache[ id ];
+	thisCache = cache[ MembershipId ];
 
-	// jQuery data() is stored in a separate object inside the object's internal data
-	// cache in order to avoid key collisions between internal data and user-defined
+	// jQuery data() is stored in a separate object insMembershipIde the object's internal data
+	// cache in order to avoMembershipId key collisions between internal data and user-defined
 	// data.
 	if ( !pvt ) {
 		if ( !thisCache.data ) {
@@ -3678,17 +3678,17 @@ function internalRemoveData( elem, name, pvt ) {
 
 		// See jQuery.data for more information
 		cache = isNode ? jQuery.cache : elem,
-		id = isNode ? elem[ jQuery.expando ] : jQuery.expando;
+		MembershipId = isNode ? elem[ jQuery.expando ] : jQuery.expando;
 
 	// If there is already no cache entry for this object, there is no
 	// purpose in continuing
-	if ( !cache[ id ] ) {
+	if ( !cache[ MembershipId ] ) {
 		return;
 	}
 
 	if ( name ) {
 
-		thisCache = pvt ? cache[ id ] : cache[ id ].data;
+		thisCache = pvt ? cache[ MembershipId ] : cache[ MembershipId ].data;
 
 		if ( thisCache ) {
 
@@ -3733,11 +3733,11 @@ function internalRemoveData( elem, name, pvt ) {
 
 	// See jQuery.data for more information
 	if ( !pvt ) {
-		delete cache[ id ].data;
+		delete cache[ MembershipId ].data;
 
 		// Don't destroy the parent cache unless the internal data object
 		// had been the only thing left in it
-		if ( !isEmptyDataObject( cache[ id ] ) ) {
+		if ( !isEmptyDataObject( cache[ MembershipId ] ) ) {
 			return;
 		}
 	}
@@ -3750,11 +3750,11 @@ function internalRemoveData( elem, name, pvt ) {
 	/* jshint eqeqeq: false */
 	} else if ( jQuery.support.deleteExpando || cache != cache.window ) {
 		/* jshint eqeqeq: true */
-		delete cache[ id ];
+		delete cache[ MembershipId ];
 
 	// When all else fails, null
 	} else {
-		cache[ id ] = null;
+		cache[ MembershipId ] = null;
 	}
 }
 
@@ -3767,7 +3767,7 @@ jQuery.extend({
 		"applet": true,
 		"embed": true,
 		// Ban all objects except for Flash (which handle expandos)
-		"object": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+		"object": "clsMembershipId:D27CDB6E-AE6D-11cf-96B8-444553540000"
 	},
 
 	hasData: function( elem ) {
@@ -3802,7 +3802,7 @@ jQuery.extend({
 		var noData = elem.nodeName && jQuery.noData[ elem.nodeName.toLowerCase() ];
 
 		// nodes accept data unless otherwise specified; rejection can be conditional
-		return !noData || noData !== true && elem.getAttribute("classid") === noData;
+		return !noData || noData !== true && elem.getAttribute("classMembershipId") === noData;
 	}
 });
 
@@ -3870,7 +3870,7 @@ function dataAttr( elem, key, data ) {
 	// data from the HTML5 data-* attribute
 	if ( data === undefined && elem.nodeType === 1 ) {
 
-		var name = "data-" + key.replace( rmultiDash, "-$1" ).toLowerCase();
+		var name = "data-" + key.replace( rmultMembershipIdash, "-$1" ).toLowerCase();
 
 		data = elem.getAttribute( name );
 
@@ -4185,7 +4185,7 @@ jQuery.fn.extend({
 
 		return this.each(function() {
 			if ( type === "string" ) {
-				// toggle individual class names
+				// toggle indivMembershipIdual class names
 				var className,
 					i = 0,
 					self = jQuery( this ),
@@ -4494,7 +4494,7 @@ jQuery.extend({
 		tabIndex: {
 			get: function( elem ) {
 				// elem.tabIndex doesn't always return the correct value when it hasn't been explicitly set
-				// http://fluidproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
+				// http://fluMembershipIdproject.org/blog/2008/01/09/getting-setting-and-removing-tabindex-values-with-javascript/
 				// Use proper attribute retrieval(#12072)
 				var tabindex = jQuery.find.attr( elem, "tabindex" );
 
@@ -4590,7 +4590,7 @@ if ( !getSetAttribute ) {
 				undefined;
 		}
 	};
-	jQuery.expr.attrHandle.id = jQuery.expr.attrHandle.name = jQuery.expr.attrHandle.coords =
+	jQuery.expr.attrHandle.MembershipId = jQuery.expr.attrHandle.name = jQuery.expr.attrHandle.coords =
 		// Some attributes are constructed with empty-string values when not defined
 		function( elem, name, isXML ) {
 			var ret;
@@ -4611,16 +4611,16 @@ if ( !getSetAttribute ) {
 	};
 
 	// Set contenteditable to false on removals(#10429)
-	// Setting to empty string throws an error as an invalid value
+	// Setting to empty string throws an error as an invalMembershipId value
 	jQuery.attrHooks.contenteditable = {
 		set: function( elem, value, name ) {
 			nodeHook.set( elem, value === "" ? false : value, name );
 		}
 	};
 
-	// Set width and height to auto instead of 0 on empty string( Bug #8150 )
+	// Set wMembershipIdth and height to auto instead of 0 on empty string( Bug #8150 )
 	// This is for removals
-	jQuery.each([ "width", "height" ], function( i, name ) {
+	jQuery.each([ "wMembershipIdth", "height" ], function( i, name ) {
 		jQuery.attrHooks[ name ] = {
 			set: function( elem, value ) {
 				if ( value === "" ) {
@@ -4739,7 +4739,7 @@ function safeActiveElement() {
 
 /*
  * Helper functions for managing events -- not part of the public interface.
- * Props to Dean Edwards' addEvent library for many of the ideas.
+ * Props to Dean Edwards' addEvent library for many of the MembershipIdeas.
  */
 jQuery.event = {
 
@@ -4763,9 +4763,9 @@ jQuery.event = {
 			selector = handleObjIn.selector;
 		}
 
-		// Make sure that the handler has a unique ID, used to find/remove it later
-		if ( !handler.guid ) {
-			handler.guid = jQuery.guid++;
+		// Make sure that the handler has a unique MembershipId, used to find/remove it later
+		if ( !handler.guMembershipId ) {
+			handler.guMembershipId = jQuery.guMembershipId++;
 		}
 
 		// Init the element's event structure and main handler, if this is the first
@@ -4812,7 +4812,7 @@ jQuery.event = {
 				origType: origType,
 				data: data,
 				handler: handler,
-				guid: handler.guid,
+				guMembershipId: handler.guMembershipId,
 				selector: selector,
 				needsContext: selector && jQuery.expr.match.needsContext.test( selector ),
 				namespace: namespaces.join(".")
@@ -4838,8 +4838,8 @@ jQuery.event = {
 			if ( special.add ) {
 				special.add.call( elem, handleObj );
 
-				if ( !handleObj.handler.guid ) {
-					handleObj.handler.guid = handler.guid;
+				if ( !handleObj.handler.guMembershipId ) {
+					handleObj.handler.guMembershipId = handler.guMembershipId;
 				}
 			}
 
@@ -4878,7 +4878,7 @@ jQuery.event = {
 			type = origType = tmp[1];
 			namespaces = ( tmp[2] || "" ).split( "." ).sort();
 
-			// Unbind all events (on this namespace, if provided) for the element
+			// Unbind all events (on this namespace, if provMembershipIded) for the element
 			if ( !type ) {
 				for ( type in events ) {
 					jQuery.event.remove( elem, type + types[ t ], handler, selector, true );
@@ -4897,7 +4897,7 @@ jQuery.event = {
 				handleObj = handlers[ j ];
 
 				if ( ( mappedTypes || origType === handleObj.origType ) &&
-					( !handler || handler.guid === handleObj.guid ) &&
+					( !handler || handler.guMembershipId === handleObj.guMembershipId ) &&
 					( !tmp || tmp.test( handleObj.namespace ) ) &&
 					( !selector || selector === handleObj.selector || selector === "**" && handleObj.selector ) ) {
 					handlers.splice( j, 1 );
@@ -4912,7 +4912,7 @@ jQuery.event = {
 			}
 
 			// Remove generic event handler if we removed something and no more handlers exist
-			// (avoids potential for endless recursion during removal of special event handlers)
+			// (avoMembershipIds potential for endless recursion during removal of special event handlers)
 			if ( origCount && !handlers.length ) {
 				if ( !special.teardown || special.teardown.call( elem, namespaces, elemData.handle ) === false ) {
 					jQuery.removeEvent( elem, type, elemData.handle );
@@ -4982,7 +4982,7 @@ jQuery.event = {
 			[ event ] :
 			jQuery.makeArray( data, [ event ] );
 
-		// Allow special events to draw outside the lines
+		// Allow special events to draw outsMembershipIde the lines
 		special = jQuery.event.special[ type ] || {};
 		if ( !onlyHandlers && special.trigger && special.trigger.apply( elem, data ) === false ) {
 			return;
@@ -5052,7 +5052,7 @@ jQuery.event = {
 					try {
 						elem[ type ]();
 					} catch ( e ) {
-						// IE<9 dies on focus/blur to hidden element (#1486,#12518)
+						// IE<9 dies on focus/blur to hMembershipIdden element (#1486,#12518)
 						// only reproducible on winXP IE8 native, not IE9 in IE8 mode
 					}
 					jQuery.event.triggered = undefined;
@@ -5134,7 +5134,7 @@ jQuery.event = {
 
 		// Find delegate handlers
 		// Black-hole SVG <use> instance trees (#13180)
-		// Avoid non-left-click bubbling in Firefox (#3861)
+		// AvoMembershipId non-left-click bubbling in Firefox (#3861)
 		if ( delegateCount && cur.nodeType && (!event.button || event.type !== "click") ) {
 
 			/* jshint eqeqeq: false */
@@ -5261,7 +5261,7 @@ jQuery.event = {
 				event.relatedTarget = fromElement === event.target ? original.toElement : fromElement;
 			}
 
-			// Add which for click: 1 === left; 2 === middle; 3 === right
+			// Add which for click: 1 === left; 2 === mMembershipIddle; 3 === right
 			// Note: button is not normalized, so don't use it
 			if ( !event.which && button !== undefined ) {
 				event.which = ( button & 1 ? 1 : ( button & 2 ? 3 : ( button & 4 ? 2 : 0 ) ) );
@@ -5285,7 +5285,7 @@ jQuery.event = {
 						return false;
 					} catch ( e ) {
 						// Support: IE<9
-						// If we error on focus to hidden element (#1486, #12518),
+						// If we error on focus to hMembershipIdden element (#1486, #12518),
 						// let .trigger() run the handlers
 					}
 				}
@@ -5329,7 +5329,7 @@ jQuery.event = {
 
 	simulate: function( type, elem, event, bubble ) {
 		// Piggyback on a donor event to simulate a different one.
-		// Fake originalEvent to avoid donor's stopPropagation, but if the
+		// Fake originalEvent to avoMembershipId donor's stopPropagation, but if the
 		// simulated event prevents default then we do the same on the donor.
 		var e = jQuery.extend(
 			new jQuery.Event(),
@@ -5393,7 +5393,7 @@ jQuery.Event = function( src, props ) {
 		this.type = src;
 	}
 
-	// Put explicitly provided properties onto the event object
+	// Put explicitly provMembershipIded properties onto the event object
 	if ( props ) {
 		jQuery.extend( this, props );
 	}
@@ -5467,7 +5467,7 @@ jQuery.each({
 				related = event.relatedTarget,
 				handleObj = event.handleObj;
 
-			// For mousenter/leave call the handler if related is outside the target.
+			// For mousenter/leave call the handler if related is outsMembershipIde the target.
 			// NB: No relatedTarget if the mouse left/entered the browser window
 			if ( !related || (related !== target && !jQuery.contains( target, related )) ) {
 				event.type = handleObj.origType;
@@ -5491,7 +5491,7 @@ if ( !jQuery.support.submitBubbles ) {
 
 			// Lazy-add a submit handler when a descendant form may potentially be submitted
 			jQuery.event.add( this, "click._submit keypress._submit", function( e ) {
-				// Node name check avoids a VML-related crash in IE (#9807)
+				// Node name check avoMembershipIds a VML-related crash in IE (#9807)
 				var elem = e.target,
 					form = jQuery.nodeName( elem, "input" ) || jQuery.nodeName( elem, "button" ) ? elem.form : undefined;
 				if ( form && !jQuery._data( form, "submitBubbles" ) ) {
@@ -5658,8 +5658,8 @@ jQuery.fn.extend({
 				jQuery().off( event );
 				return origFn.apply( this, arguments );
 			};
-			// Use same guid so caller can remove using origFn
-			fn.guid = origFn.guid || ( origFn.guid = jQuery.guid++ );
+			// Use same guMembershipId so caller can remove using origFn
+			fn.guMembershipId = origFn.guMembershipId || ( origFn.guMembershipId = jQuery.guMembershipId++ );
 		}
 		return this.each( function() {
 			jQuery.event.add( this, types, fn, data, selector );
@@ -5966,7 +5966,7 @@ jQuery.extend({
 	}
 });
 
-// Implement the identical functionality for filter and not
+// Implement the MembershipIdentical functionality for filter and not
 function winnow( elements, qualifier, not ) {
 	if ( jQuery.isFunction( qualifier ) ) {
 		return jQuery.grep( elements, function( elem, i ) {
@@ -6009,8 +6009,8 @@ function createSafeFragment( document ) {
 	return safeFrag;
 }
 
-var nodeNames = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|" +
-		"header|hgroup|mark|meter|nav|output|progress|section|summary|time|video",
+var nodeNames = "abbr|article|asMembershipIde|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|" +
+		"header|hgroup|mark|meter|nav|output|progress|section|summary|time|vMembershipIdeo",
 	rinlinejQuery = / jQuery\d+="(?:null|\d+)"/g,
 	rnoshimcache = new RegExp("<(?:" + nodeNames + ")[\\s/>]", "i"),
 	rleadingWhitespace = /^\s+/,
@@ -6298,7 +6298,7 @@ jQuery.fn.extend({
 					}
 				}
 
-				// Fix #11809: Avoid leaking memory
+				// Fix #11809: AvoMembershipId leaking memory
 				fragment = first = null;
 			}
 		}
@@ -6397,14 +6397,14 @@ function fixCloneNodeIssues( src, dest ) {
 		disableScript( dest ).text = src.text;
 		restoreScript( dest );
 
-	// IE6-10 improperly clones children of object elements using classid.
+	// IE6-10 improperly clones children of object elements using classMembershipId.
 	// IE10 throws NoModificationAllowedError if parent is null, #12132.
 	} else if ( nodeName === "object" ) {
 		if ( dest.parentNode ) {
 			dest.outerHTML = src.outerHTML;
 		}
 
-		// This path appears unavoidable for IE9. When cloning an object
+		// This path appears unavoMembershipIdable for IE9. When cloning an object
 		// element in IE9, the outerHTML strategy above is not sufficient.
 		// If the src has innerHTML and the destination does not,
 		// copy the src.innerHTML into the dest.innerHTML. #10324
@@ -6676,7 +6676,7 @@ jQuery.extend({
 	},
 
 	cleanData: function( elems, /* internal */ acceptData ) {
-		var elem, type, id, data,
+		var elem, type, MembershipId, data,
 			i = 0,
 			internalKey = jQuery.expando,
 			cache = jQuery.cache,
@@ -6687,8 +6687,8 @@ jQuery.extend({
 
 			if ( acceptData || jQuery.acceptData( elem ) ) {
 
-				id = elem[ internalKey ];
-				data = id && cache[ id ];
+				MembershipId = elem[ internalKey ];
+				data = MembershipId && cache[ MembershipId ];
 
 				if ( data ) {
 					if ( data.events ) {
@@ -6696,7 +6696,7 @@ jQuery.extend({
 							if ( special[ type ] ) {
 								jQuery.event.remove( elem, type );
 
-							// This is a shortcut to avoid jQuery.event.remove's overhead
+							// This is a shortcut to avoMembershipId jQuery.event.remove's overhead
 							} else {
 								jQuery.removeEvent( elem, type, data.handle );
 							}
@@ -6704,9 +6704,9 @@ jQuery.extend({
 					}
 
 					// Remove cache only if it was not already removed by jQuery.event.remove
-					if ( cache[ id ] ) {
+					if ( cache[ MembershipId ] ) {
 
-						delete cache[ id ];
+						delete cache[ MembershipId ];
 
 						// IE does not allow us to delete expando properties from nodes,
 						// nor does it have a removeAttribute function on Document nodes;
@@ -6721,7 +6721,7 @@ jQuery.extend({
 							elem[ internalKey ] = null;
 						}
 
-						core_deletedIds.push( id );
+						core_deletedMembershipIds.push( MembershipId );
 					}
 				}
 			}
@@ -6818,7 +6818,7 @@ var iframe, getStyles, curCSS,
 	rrelNum = new RegExp( "^([+-])=(" + core_pnum + ")", "i" ),
 	elemdisplay = { BODY: "block" },
 
-	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
+	cssShow = { position: "absolute", visibility: "hMembershipIdden", display: "block" },
 	cssNormalTransform = {
 		letterSpacing: 0,
 		fontWeight: 400
@@ -6850,15 +6850,15 @@ function vendorPropName( style, name ) {
 	return origName;
 }
 
-function isHidden( elem, el ) {
-	// isHidden might be called from jQuery#filter function;
+function isHMembershipIdden( elem, el ) {
+	// isHMembershipIdden might be called from jQuery#filter function;
 	// in that case, element will be second argument
 	elem = el || elem;
 	return jQuery.css( elem, "display" ) === "none" || !jQuery.contains( elem.ownerDocument, elem );
 }
 
-function showHide( elements, show ) {
-	var display, elem, hidden,
+function showHMembershipIde( elements, show ) {
+	var display, elem, hMembershipIdden,
 		values = [],
 		index = 0,
 		length = elements.length;
@@ -6873,31 +6873,31 @@ function showHide( elements, show ) {
 		display = elem.style.display;
 		if ( show ) {
 			// Reset the inline display of this element to learn if it is
-			// being hidden by cascaded rules or not
+			// being hMembershipIdden by cascaded rules or not
 			if ( !values[ index ] && display === "none" ) {
 				elem.style.display = "";
 			}
 
-			// Set elements which have been overridden with display: none
+			// Set elements which have been overrMembershipIdden with display: none
 			// in a stylesheet to whatever the default browser style is
 			// for such an element
-			if ( elem.style.display === "" && isHidden( elem ) ) {
+			if ( elem.style.display === "" && isHMembershipIdden( elem ) ) {
 				values[ index ] = jQuery._data( elem, "olddisplay", css_defaultDisplay(elem.nodeName) );
 			}
 		} else {
 
 			if ( !values[ index ] ) {
-				hidden = isHidden( elem );
+				hMembershipIdden = isHMembershipIdden( elem );
 
-				if ( display && display !== "none" || !hidden ) {
-					jQuery._data( elem, "olddisplay", hidden ? display : jQuery.css( elem, "display" ) );
+				if ( display && display !== "none" || !hMembershipIdden ) {
+					jQuery._data( elem, "olddisplay", hMembershipIdden ? display : jQuery.css( elem, "display" ) );
 				}
 			}
 		}
 	}
 
 	// Set the display of most of the elements in a second loop
-	// to avoid the constant reflow
+	// to avoMembershipId the constant reflow
 	for ( index = 0; index < length; index++ ) {
 		elem = elements[ index ];
 		if ( !elem.style ) {
@@ -6935,28 +6935,28 @@ jQuery.fn.extend({
 		}, name, value, arguments.length > 1 );
 	},
 	show: function() {
-		return showHide( this, true );
+		return showHMembershipIde( this, true );
 	},
-	hide: function() {
-		return showHide( this );
+	hMembershipIde: function() {
+		return showHMembershipIde( this );
 	},
 	toggle: function( state ) {
 		if ( typeof state === "boolean" ) {
-			return state ? this.show() : this.hide();
+			return state ? this.show() : this.hMembershipIde();
 		}
 
 		return this.each(function() {
-			if ( isHidden( this ) ) {
+			if ( isHMembershipIdden( this ) ) {
 				jQuery( this ).show();
 			} else {
-				jQuery( this ).hide();
+				jQuery( this ).hMembershipIde();
 			}
 		});
 	}
 });
 
 jQuery.extend({
-	// Add in style property hooks for overriding the default
+	// Add in style property hooks for overrMembershipIding the default
 	// behavior of getting and setting a style property
 	cssHooks: {
 		opacity: {
@@ -6979,7 +6979,7 @@ jQuery.extend({
 		"opacity": true,
 		"order": true,
 		"orphans": true,
-		"widows": true,
+		"wMembershipIdows": true,
 		"zIndex": true,
 		"zoom": true
 	},
@@ -7031,15 +7031,15 @@ jQuery.extend({
 			}
 
 			// Fixes #8908, it can be done more correctly by specifing setters in cssHooks,
-			// but it would mean to define eight (for every problematic property) identical functions
+			// but it would mean to define eight (for every problematic property) MembershipIdentical functions
 			if ( !jQuery.support.clearCloneStyle && value === "" && name.indexOf("background") === 0 ) {
 				style[ name ] = "inherit";
 			}
 
-			// If a hook was provided, use that value, otherwise just set the specified value
+			// If a hook was provMembershipIded, use that value, otherwise just set the specified value
 			if ( !hooks || !("set" in hooks) || (value = hooks.set( elem, value, extra )) !== undefined ) {
 
-				// Wrapped to prevent IE from throwing errors when 'invalid' values are provided
+				// Wrapped to prevent IE from throwing errors when 'invalMembershipId' values are provMembershipIded
 				// Fixes bug #5509
 				try {
 					style[ name ] = value;
@@ -7047,7 +7047,7 @@ jQuery.extend({
 			}
 
 		} else {
-			// If a hook was provided get the non-computed value from there
+			// If a hook was provMembershipIded get the non-computed value from there
 			if ( hooks && "get" in hooks && (ret = hooks.get( elem, false, extra )) !== undefined ) {
 				return ret;
 			}
@@ -7068,7 +7068,7 @@ jQuery.extend({
 		// followed by the unprefixed version
 		hooks = jQuery.cssHooks[ name ] || jQuery.cssHooks[ origName ];
 
-		// If a hook was provided get the computed value from there
+		// If a hook was provMembershipIded get the computed value from there
 		if ( hooks && "get" in hooks ) {
 			val = hooks.get( elem, true, extra );
 		}
@@ -7083,7 +7083,7 @@ jQuery.extend({
 			val = cssNormalTransform[ name ];
 		}
 
-		// Return, converting to number if forced or a qualifier was provided and val looks numeric
+		// Return, converting to number if forced or a qualifier was provMembershipIded and val looks numeric
 		if ( extra === "" || extra ) {
 			num = parseFloat( val );
 			return extra === true || jQuery.isNumeric( num ) ? num || 0 : val;
@@ -7100,7 +7100,7 @@ if ( window.getComputedStyle ) {
 	};
 
 	curCSS = function( elem, name, _computed ) {
-		var width, minWidth, maxWidth,
+		var wMembershipIdth, minWMembershipIdth, maxWMembershipIdth,
 			computed = _computed || getStyles( elem ),
 
 			// getPropertyValue is only needed for .css('filter') in IE9, see #12537
@@ -7115,23 +7115,23 @@ if ( window.getComputedStyle ) {
 
 			// A tribute to the "awesome hack by Dean Edwards"
 			// Chrome < 17 and Safari 5.0 uses "computed value" instead of "used value" for margin-right
-			// Safari 5.1.7 (at least) returns percentage for a larger set of values, but width seems to be reliably pixels
+			// Safari 5.1.7 (at least) returns percentage for a larger set of values, but wMembershipIdth seems to be reliably pixels
 			// this is against the CSSOM draft spec: http://dev.w3.org/csswg/cssom/#resolved-values
 			if ( rnumnonpx.test( ret ) && rmargin.test( name ) ) {
 
 				// Remember the original values
-				width = style.width;
-				minWidth = style.minWidth;
-				maxWidth = style.maxWidth;
+				wMembershipIdth = style.wMembershipIdth;
+				minWMembershipIdth = style.minWMembershipIdth;
+				maxWMembershipIdth = style.maxWMembershipIdth;
 
 				// Put in the new values to get a computed value out
-				style.minWidth = style.maxWidth = style.width = ret;
-				ret = computed.width;
+				style.minWMembershipIdth = style.maxWMembershipIdth = style.wMembershipIdth = ret;
+				ret = computed.wMembershipIdth;
 
 				// Revert the changed values
-				style.width = width;
-				style.minWidth = minWidth;
-				style.maxWidth = maxWidth;
+				style.wMembershipIdth = wMembershipIdth;
+				style.minWMembershipIdth = minWMembershipIdth;
+				style.maxWMembershipIdth = maxWMembershipIdth;
 			}
 		}
 
@@ -7148,7 +7148,7 @@ if ( window.getComputedStyle ) {
 			ret = computed ? computed[ name ] : undefined,
 			style = elem.style;
 
-		// Avoid setting ret to empty string here
+		// AvoMembershipId setting ret to empty string here
 		// so we don't default to auto
 		if ( ret == null && style && style[ name ] ) {
 			ret = style[ name ];
@@ -7194,12 +7194,12 @@ function setPositiveNumber( elem, value, subtract ) {
 		value;
 }
 
-function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
+function augmentWMembershipIdthOrHeight( elem, name, extra, isBorderBox, styles ) {
 	var i = extra === ( isBorderBox ? "border" : "content" ) ?
-		// If we already have the right measurement, avoid augmentation
+		// If we already have the right measurement, avoMembershipId augmentation
 		4 :
 		// Otherwise initialize for horizontal or vertical properties
-		name === "width" ? 1 : 0,
+		name === "wMembershipIdth" ? 1 : 0,
 
 		val = 0;
 
@@ -7217,7 +7217,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 
 			// at this point, extra isn't border nor margin, so remove border
 			if ( extra !== "margin" ) {
-				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
+				val -= jQuery.css( elem, "border" + cssExpand[ i ] + "WMembershipIdth", true, styles );
 			}
 		} else {
 			// at this point, extra isn't content, so add padding
@@ -7225,7 +7225,7 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 
 			// at this point, extra isn't content nor padding, so add border
 			if ( extra !== "padding" ) {
-				val += jQuery.css( elem, "border" + cssExpand[ i ] + "Width", true, styles );
+				val += jQuery.css( elem, "border" + cssExpand[ i ] + "WMembershipIdth", true, styles );
 			}
 		}
 	}
@@ -7233,17 +7233,17 @@ function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {
 	return val;
 }
 
-function getWidthOrHeight( elem, name, extra ) {
+function getWMembershipIdthOrHeight( elem, name, extra ) {
 
 	// Start with offset property, which is equivalent to the border-box value
 	var valueIsBorderBox = true,
-		val = name === "width" ? elem.offsetWidth : elem.offsetHeight,
+		val = name === "wMembershipIdth" ? elem.offsetWMembershipIdth : elem.offsetHeight,
 		styles = getStyles( elem ),
 		isBorderBox = jQuery.support.boxSizing && jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-	// some non-html elements return undefined for offsetWidth, so check for null/undefined
-	// svg - https://bugzilla.mozilla.org/show_bug.cgi?id=649285
-	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?id=491668
+	// some non-html elements return undefined for offsetWMembershipIdth, so check for null/undefined
+	// svg - https://bugzilla.mozilla.org/show_bug.cgi?MembershipId=649285
+	// MathML - https://bugzilla.mozilla.org/show_bug.cgi?MembershipId=491668
 	if ( val <= 0 || val == null ) {
 		// Fall back to computed then uncomputed css if necessary
 		val = curCSS( elem, name, styles );
@@ -7266,7 +7266,7 @@ function getWidthOrHeight( elem, name, extra ) {
 
 	// use the active box-sizing model to add/subtract irrelevant styles
 	return ( val +
-		augmentWidthOrHeight(
+		augmentWMembershipIdthOrHeight(
 			elem,
 			name,
 			extra || ( isBorderBox ? "border" : "content" ),
@@ -7284,11 +7284,11 @@ function css_defaultDisplay( nodeName ) {
 	if ( !display ) {
 		display = actualDisplay( nodeName, doc );
 
-		// If the simple way fails, read from inside an iframe
+		// If the simple way fails, read from insMembershipIde an iframe
 		if ( display === "none" || !display ) {
 			// Use the already-created iframe if possible
 			iframe = ( iframe ||
-				jQuery("<iframe frameborder='0' width='0' height='0'/>")
+				jQuery("<iframe frameborder='0' wMembershipIdth='0' height='0'/>")
 				.css( "cssText", "display:block !important" )
 			).appendTo( doc.documentElement );
 
@@ -7316,24 +7316,24 @@ function actualDisplay( name, doc ) {
 	return display;
 }
 
-jQuery.each([ "height", "width" ], function( i, name ) {
+jQuery.each([ "height", "wMembershipIdth" ], function( i, name ) {
 	jQuery.cssHooks[ name ] = {
 		get: function( elem, computed, extra ) {
 			if ( computed ) {
 				// certain elements can have dimension info if we invisibly show them
 				// however, it must have a current display style that would benefit from this
-				return elem.offsetWidth === 0 && rdisplayswap.test( jQuery.css( elem, "display" ) ) ?
+				return elem.offsetWMembershipIdth === 0 && rdisplayswap.test( jQuery.css( elem, "display" ) ) ?
 					jQuery.swap( elem, cssShow, function() {
-						return getWidthOrHeight( elem, name, extra );
+						return getWMembershipIdthOrHeight( elem, name, extra );
 					}) :
-					getWidthOrHeight( elem, name, extra );
+					getWMembershipIdthOrHeight( elem, name, extra );
 			}
 		},
 
 		set: function( elem, value, extra ) {
 			var styles = extra && getStyles( elem );
 			return setPositiveNumber( elem, value, extra ?
-				augmentWidthOrHeight(
+				augmentWMembershipIdthOrHeight(
 					elem,
 					name,
 					extra,
@@ -7371,7 +7371,7 @@ if ( !jQuery.support.opacity ) {
 					style.removeAttribute ) {
 
 				// Setting style.filter to null, "" & " " still leave "filter:" in the cssText
-				// if "filter:" is present at all, clearType is disabled, we want to avoid this
+				// if "filter:" is present at all, clearType is disabled, we want to avoMembershipId this
 				// style.removeAttribute is IE Only, but so apparently is this code path...
 				style.removeAttribute( "filter" );
 
@@ -7405,7 +7405,7 @@ jQuery(function() {
 		};
 	}
 
-	// Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
+	// Webkit bug: https://bugs.webkit.org/show_bug.cgi?MembershipId=29084
 	// getComputedStyle returns percent when specified for top/left/bottom/right
 	// rather than make the css module depend on the offset module, we just check for it here
 	if ( !jQuery.support.pixelPosition && jQuery.fn.position ) {
@@ -7427,15 +7427,15 @@ jQuery(function() {
 });
 
 if ( jQuery.expr && jQuery.expr.filters ) {
-	jQuery.expr.filters.hidden = function( elem ) {
+	jQuery.expr.filters.hMembershipIdden = function( elem ) {
 		// Support: Opera <= 12.12
-		// Opera reports offsetWidths and offsetHeights less than zero on some elements
-		return elem.offsetWidth <= 0 && elem.offsetHeight <= 0 ||
-			(!jQuery.support.reliableHiddenOffsets && ((elem.style && elem.style.display) || jQuery.css( elem, "display" )) === "none");
+		// Opera reports offsetWMembershipIdths and offsetHeights less than zero on some elements
+		return elem.offsetWMembershipIdth <= 0 && elem.offsetHeight <= 0 ||
+			(!jQuery.support.reliableHMembershipIddenOffsets && ((elem.style && elem.style.display) || jQuery.css( elem, "display" )) === "none");
 	};
 
 	jQuery.expr.filters.visible = function( elem ) {
-		return !jQuery.expr.filters.hidden( elem );
+		return !jQuery.expr.filters.hMembershipIdden( elem );
 	};
 }
 
@@ -7443,7 +7443,7 @@ if ( jQuery.expr && jQuery.expr.filters ) {
 jQuery.each({
 	margin: "",
 	padding: "",
-	border: "Width"
+	border: "WMembershipIdth"
 }, function( prefix, suffix ) {
 	jQuery.cssHooks[ prefix + suffix ] = {
 		expand: function( value ) {
@@ -7528,7 +7528,7 @@ jQuery.param = function( a, traditional ) {
 
 	} else {
 		// If traditional, encode the "old" way (the way 1.3.2 or older
-		// did it), otherwise encode params recursively.
+		// dMembershipId it), otherwise encode params recursively.
 		for ( prefix in a ) {
 			buildParams( prefix, a[ prefix ], traditional, add );
 		}
@@ -7608,7 +7608,7 @@ var
 	rts = /([?&])_=[^&]*/,
 	rheaders = /^(.*?):[ \t]*([^\r\n]*)\r?$/mg, // IE leaves an \r character at EOL
 	// #7653, #8125, #8152: local protocol detection
-	rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
+	rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|wMembershipIdget):$/,
 	rnoContent = /^(?:GET|HEAD)$/,
 	rprotocol = /^\/\//,
 	rurl = /^([\w.+-]+:)(?:\/\/([^\/?#:]*)(?::(\d+)|)|)/,
@@ -7634,7 +7634,7 @@ var
 	 */
 	transports = {},
 
-	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
+	// AvoMembershipId comment-prolog char sequence (#10098); must appease lint and evade compression
 	allTypes = "*/".concat("*");
 
 // #8138, IE may throw an exception when accessing
@@ -7771,7 +7771,7 @@ jQuery.fn.load = function( url, params, callback ) {
 			self.html( selector ?
 
 				// If a selector was specified, locate the right elements in a dummy div
-				// Exclude scripts to avoid IE 'Permission Denied' errors
+				// Exclude scripts to avoMembershipId IE 'Permission Denied' errors
 				jQuery("<div>").append( jQuery.parseHTML( responseText ) ).find( selector ) :
 
 				// Otherwise use the full result
@@ -7967,8 +7967,8 @@ jQuery.extend({
 					return this;
 				},
 
-				// Overrides response content-type header
-				overrideMimeType: function( type ) {
+				// OverrMembershipIdes response content-type header
+				overrMembershipIdeMimeType: function( type ) {
 					if ( !state ) {
 						s.mimeType = type;
 					}
@@ -8009,7 +8009,7 @@ jQuery.extend({
 		jqXHR.error = jqXHR.fail;
 
 		// Remove hash character (#7531: and string promotion)
-		// Add protocol if not provided (#5866: IE7 issue with protocol-less urls)
+		// Add protocol if not provMembershipIded (#5866: IE7 issue with protocol-less urls)
 		// Handle falsy url in the settings object (#10093: consistency with old signature)
 		// We also use the url parameter if available
 		s.url = ( ( url || s.url || ajaxLocation ) + "" ).replace( rhash, "" ).replace( rprotocol, ajaxLocParts[ 1 ] + "//" );
@@ -8038,7 +8038,7 @@ jQuery.extend({
 		// Apply prefilters
 		inspectPrefiltersOrTransports( prefilters, s, options, jqXHR );
 
-		// If request was aborted inside a prefilter, stop there
+		// If request was aborted insMembershipIde a prefilter, stop there
 		if ( state === 2 ) {
 			return jqXHR;
 		}
@@ -8384,7 +8384,7 @@ function ajaxConvert( s, response, jqXHR, isSuccess ) {
 			jqXHR[ s.responseFields[ current ] ] = response;
 		}
 
-		// Apply the dataFilter if provided
+		// Apply the dataFilter if provMembershipIded
 		if ( !prev && isSuccess && s.dataFilter ) {
 			response = s.dataFilter( response, s.dataType );
 		}
@@ -8526,7 +8526,7 @@ jQuery.ajaxTransport( "script", function(s) {
 				};
 
 				// Circumvent IE6 bugs with base elements (#2709 and #4378) by prepending
-				// Use native DOM manipulation to avoid our domManip AJAX trickery
+				// Use native DOM manipulation to avoMembershipId our domManip AJAX trickery
 				head.insertBefore( script, head.firstChild );
 			},
 
@@ -8619,7 +8619,7 @@ jQuery.ajaxPrefilter( "json jsonp", function( s, originalSettings, jqXHR ) {
 	}
 });
 var xhrCallbacks, xhrSupported,
-	xhrId = 0,
+	xhrMembershipId = 0,
 	// #5280: Internet Explorer will keep connections alive if we don't abort on unload
 	xhrOnUnloadAbort = window.ActiveXObject && function() {
 		// Abort all pending requests
@@ -8662,7 +8662,7 @@ xhrSupported = jQuery.ajaxSettings.xhr();
 jQuery.support.cors = !!xhrSupported && ( "withCredentials" in xhrSupported );
 xhrSupported = jQuery.support.ajax = !!xhrSupported;
 
-// Create transport if the browser can provide an xhr
+// Create transport if the browser can provMembershipIde an xhr
 if ( xhrSupported ) {
 
 	jQuery.ajaxTransport(function( s ) {
@@ -8686,23 +8686,23 @@ if ( xhrSupported ) {
 						xhr.open( s.type, s.url, s.async );
 					}
 
-					// Apply custom fields if provided
+					// Apply custom fields if provMembershipIded
 					if ( s.xhrFields ) {
 						for ( i in s.xhrFields ) {
 							xhr[ i ] = s.xhrFields[ i ];
 						}
 					}
 
-					// Override mime type if needed
-					if ( s.mimeType && xhr.overrideMimeType ) {
-						xhr.overrideMimeType( s.mimeType );
+					// OverrMembershipIde mime type if needed
+					if ( s.mimeType && xhr.overrMembershipIdeMimeType ) {
+						xhr.overrMembershipIdeMimeType( s.mimeType );
 					}
 
 					// X-Requested-With header
 					// For cross-domain requests, seeing as conditions for a preflight are
 					// akin to a jigsaw puzzle, we simply never set it to be sure.
 					// (it can always be set on a per-request basis or even using ajaxSetup)
-					// For same-domain requests, won't change header if already provided.
+					// For same-domain requests, won't change header if already provMembershipIded.
 					if ( !s.crossDomain && !headers["X-Requested-With"] ) {
 						headers["X-Requested-With"] = "XMLHttpRequest";
 					}
@@ -8801,7 +8801,7 @@ if ( xhrSupported ) {
 						// retrieved directly we need to fire the callback
 						setTimeout( callback );
 					} else {
-						handle = ++xhrId;
+						handle = ++xhrMembershipId;
 						if ( xhrOnUnloadAbort ) {
 							// Create the active xhrs callbacks list if needed
 							// and attach the unload handler
@@ -8825,8 +8825,8 @@ if ( xhrSupported ) {
 		}
 	});
 }
-var fxNow, timerId,
-	rfxtypes = /^(?:toggle|show|hide)$/,
+var fxNow, timerMembershipId,
+	rfxtypes = /^(?:toggle|show|hMembershipIde)$/,
 	rfxnum = new RegExp( "^(?:([+-])=|)(" + core_pnum + ")([a-z%]*)$", "i" ),
 	rrun = /queueHooks$/,
 	animationPrefilters = [ defaultPrefilter ],
@@ -8855,7 +8855,7 @@ var fxNow, timerId,
 
 				do {
 					// If previous iteration zeroed out, double until we get *something*
-					// Use a string for doubling factor so we don't accidentally see scale as unchanged below
+					// Use a string for doubling factor so we don't accMembershipIdentally see scale as unchanged below
 					scale = scale || ".5";
 
 					// Adjust and apply
@@ -8871,7 +8871,7 @@ var fxNow, timerId,
 			if ( parts ) {
 				start = tween.start = +start || +target || 0;
 				tween.unit = unit;
-				// If a +=/-= token was provided, we're doing a relative animation
+				// If a +=/-= token was provMembershipIded, we're doing a relative animation
 				tween.end = parts[ 1 ] ?
 					start + ( parts[ 1 ] + 1 ) * parts[ 2 ] :
 					+parts[ 2 ];
@@ -9075,12 +9075,12 @@ jQuery.Animation = jQuery.extend( Animation, {
 });
 
 function defaultPrefilter( elem, props, opts ) {
-	/* jshint validthis: true */
+	/* jshint valMembershipIdthis: true */
 	var prop, value, toggle, tween, hooks, oldfire,
 		anim = this,
 		orig = {},
 		style = elem.style,
-		hidden = elem.nodeType && isHidden( elem ),
+		hMembershipIdden = elem.nodeType && isHMembershipIdden( elem ),
 		dataShow = jQuery._data( elem, "fxshow" );
 
 	// handle queue: false promises
@@ -9109,16 +9109,16 @@ function defaultPrefilter( elem, props, opts ) {
 		});
 	}
 
-	// height/width overflow pass
-	if ( elem.nodeType === 1 && ( "height" in props || "width" in props ) ) {
+	// height/wMembershipIdth overflow pass
+	if ( elem.nodeType === 1 && ( "height" in props || "wMembershipIdth" in props ) ) {
 		// Make sure that nothing sneaks out
 		// Record all 3 overflow attributes because IE does not
 		// change the overflow attribute when overflowX and
 		// overflowY are set to the same value
 		opts.overflow = [ style.overflow, style.overflowX, style.overflowY ];
 
-		// Set display property to inline-block for height/width
-		// animations on inline elements that are having width/height animated
+		// Set display property to inline-block for height/wMembershipIdth
+		// animations on inline elements that are having wMembershipIdth/height animated
 		if ( jQuery.css( elem, "display" ) === "inline" &&
 				jQuery.css( elem, "float" ) === "none" ) {
 
@@ -9134,7 +9134,7 @@ function defaultPrefilter( elem, props, opts ) {
 	}
 
 	if ( opts.overflow ) {
-		style.overflow = "hidden";
+		style.overflow = "hMembershipIdden";
 		if ( !jQuery.support.shrinkWrapBlocks ) {
 			anim.always(function() {
 				style.overflow = opts.overflow[ 0 ];
@@ -9145,13 +9145,13 @@ function defaultPrefilter( elem, props, opts ) {
 	}
 
 
-	// show/hide pass
+	// show/hMembershipIde pass
 	for ( prop in props ) {
 		value = props[ prop ];
 		if ( rfxtypes.exec( value ) ) {
 			delete props[ prop ];
 			toggle = toggle || value === "toggle";
-			if ( value === ( hidden ? "hide" : "show" ) ) {
+			if ( value === ( hMembershipIdden ? "hMembershipIde" : "show" ) ) {
 				continue;
 			}
 			orig[ prop ] = dataShow && dataShow[ prop ] || jQuery.style( elem, prop );
@@ -9160,8 +9160,8 @@ function defaultPrefilter( elem, props, opts ) {
 
 	if ( !jQuery.isEmptyObject( orig ) ) {
 		if ( dataShow ) {
-			if ( "hidden" in dataShow ) {
-				hidden = dataShow.hidden;
+			if ( "hMembershipIdden" in dataShow ) {
+				hMembershipIdden = dataShow.hMembershipIdden;
 			}
 		} else {
 			dataShow = jQuery._data( elem, "fxshow", {} );
@@ -9169,13 +9169,13 @@ function defaultPrefilter( elem, props, opts ) {
 
 		// store state if its toggle - enables .stop().toggle() to "reverse"
 		if ( toggle ) {
-			dataShow.hidden = !hidden;
+			dataShow.hMembershipIdden = !hMembershipIdden;
 		}
-		if ( hidden ) {
+		if ( hMembershipIdden ) {
 			jQuery( elem ).show();
 		} else {
 			anim.done(function() {
-				jQuery( elem ).hide();
+				jQuery( elem ).hMembershipIde();
 			});
 		}
 		anim.done(function() {
@@ -9186,13 +9186,13 @@ function defaultPrefilter( elem, props, opts ) {
 			}
 		});
 		for ( prop in orig ) {
-			tween = createTween( hidden ? dataShow[ prop ] : 0, prop, anim );
+			tween = createTween( hMembershipIdden ? dataShow[ prop ] : 0, prop, anim );
 
 			if ( !( prop in dataShow ) ) {
 				dataShow[ prop ] = tween.start;
-				if ( hidden ) {
+				if ( hMembershipIdden ) {
 					tween.end = tween.start;
-					tween.start = prop === "width" || prop === "height" ? 1 : 0;
+					tween.start = prop === "wMembershipIdth" || prop === "height" ? 1 : 0;
 				}
 			}
 		}
@@ -9293,7 +9293,7 @@ Tween.propHooks.scrollTop = Tween.propHooks.scrollLeft = {
 	}
 };
 
-jQuery.each([ "toggle", "show", "hide" ], function( i, name ) {
+jQuery.each([ "toggle", "show", "hMembershipIde" ], function( i, name ) {
 	var cssFn = jQuery.fn[ name ];
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
 		return speed == null || typeof speed === "boolean" ?
@@ -9305,8 +9305,8 @@ jQuery.each([ "toggle", "show", "hide" ], function( i, name ) {
 jQuery.fn.extend({
 	fadeTo: function( speed, to, easing, callback ) {
 
-		// show any hidden elements after setting opacity to 0
-		return this.filter( isHidden ).css( "opacity", 0 ).show()
+		// show any hMembershipIdden elements after setting opacity to 0
+		return this.filter( isHMembershipIdden ).css( "opacity", 0 ).show()
 
 			// animate to the value specified
 			.end().animate({ opacity: to }, speed, easing, callback );
@@ -9423,21 +9423,21 @@ jQuery.fn.extend({
 });
 
 // Generate parameters to create a standard animation
-function genFx( type, includeWidth ) {
+function genFx( type, includeWMembershipIdth ) {
 	var which,
 		attrs = { height: type },
 		i = 0;
 
-	// if we include width, step value is 1 to do all cssExpand values,
-	// if we don't include width, step value is 2 to skip over Left and Right
-	includeWidth = includeWidth? 1 : 0;
-	for( ; i < 4 ; i += 2 - includeWidth ) {
+	// if we include wMembershipIdth, step value is 1 to do all cssExpand values,
+	// if we don't include wMembershipIdth, step value is 2 to skip over Left and Right
+	includeWMembershipIdth = includeWMembershipIdth? 1 : 0;
+	for( ; i < 4 ; i += 2 - includeWMembershipIdth ) {
 		which = cssExpand[ i ];
 		attrs[ "margin" + which ] = attrs[ "padding" + which ] = type;
 	}
 
-	if ( includeWidth ) {
-		attrs.opacity = attrs.width = type;
+	if ( includeWMembershipIdth ) {
+		attrs.opacity = attrs.wMembershipIdth = type;
 	}
 
 	return attrs;
@@ -9445,11 +9445,11 @@ function genFx( type, includeWidth ) {
 
 // Generate shortcuts for custom animations
 jQuery.each({
-	slideDown: genFx("show"),
-	slideUp: genFx("hide"),
-	slideToggle: genFx("toggle"),
+	slMembershipIdeDown: genFx("show"),
+	slMembershipIdeUp: genFx("hMembershipIde"),
+	slMembershipIdeToggle: genFx("toggle"),
 	fadeIn: { opacity: "show" },
-	fadeOut: { opacity: "hide" },
+	fadeOut: { opacity: "hMembershipIde" },
 	fadeToggle: { opacity: "toggle" }
 }, function( name, props ) {
 	jQuery.fn[ name ] = function( speed, easing, callback ) {
@@ -9530,14 +9530,14 @@ jQuery.fx.timer = function( timer ) {
 jQuery.fx.interval = 13;
 
 jQuery.fx.start = function() {
-	if ( !timerId ) {
-		timerId = setInterval( jQuery.fx.tick, jQuery.fx.interval );
+	if ( !timerMembershipId ) {
+		timerMembershipId = setInterval( jQuery.fx.tick, jQuery.fx.interval );
 	}
 };
 
 jQuery.fx.stop = function() {
-	clearInterval( timerId );
-	timerId = null;
+	clearInterval( timerMembershipId );
+	timerMembershipId = null;
 };
 
 jQuery.fx.speeds = {
@@ -9667,8 +9667,8 @@ jQuery.fn.extend({
 			}
 
 			// Add offsetParent borders
-			parentOffset.top  += jQuery.css( offsetParent[ 0 ], "borderTopWidth", true );
-			parentOffset.left += jQuery.css( offsetParent[ 0 ], "borderLeftWidth", true );
+			parentOffset.top  += jQuery.css( offsetParent[ 0 ], "borderTopWMembershipIdth", true );
+			parentOffset.left += jQuery.css( offsetParent[ 0 ], "borderLeftWMembershipIdth", true );
 		}
 
 		// Subtract parent offsets and element margins
@@ -9726,10 +9726,10 @@ function getWindow( elem ) {
 			elem.defaultView || elem.parentWindow :
 			false;
 }
-// Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
-jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
+// Create innerHeight, innerWMembershipIdth, height, wMembershipIdth, outerHeight and outerWMembershipIdth methods
+jQuery.each( { Height: "height", WMembershipIdth: "wMembershipIdth" }, function( name, type ) {
 	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name }, function( defaultExtra, funcName ) {
-		// margin is only for outerHeight, outerWidth
+		// margin is only for outerHeight, outerWMembershipIdth
 		jQuery.fn[ funcName ] = function( margin, value ) {
 			var chainable = arguments.length && ( defaultExtra || typeof margin !== "boolean" ),
 				extra = defaultExtra || ( margin === true || value === true ? "margin" : "border" );
@@ -9744,11 +9744,11 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 					return elem.document.documentElement[ "client" + name ];
 				}
 
-				// Get document width or height
+				// Get document wMembershipIdth or height
 				if ( elem.nodeType === 9 ) {
 					doc = elem.documentElement;
 
-					// Either scroll[Width/Height] or offset[Width/Height] or client[Width/Height], whichever is greatest
+					// Either scroll[WMembershipIdth/Height] or offset[WMembershipIdth/Height] or client[WMembershipIdth/Height], whichever is greatest
 					// unfortunately, this causes bug #3838 in IE6/8 only, but there is currently no good, small way to fix it.
 					return Math.max(
 						elem.body[ "scroll" + name ], doc[ "scroll" + name ],
@@ -9758,10 +9758,10 @@ jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
 				}
 
 				return value === undefined ?
-					// Get width or height on the element, requesting but not forcing parseFloat
+					// Get wMembershipIdth or height on the element, requesting but not forcing parseFloat
 					jQuery.css( elem, type, extra ) :
 
-					// Set width or height on the element
+					// Set wMembershipIdth or height on the element
 					jQuery.style( elem, type, value, extra );
 			}, type, chainable ? margin : undefined, chainable, null );
 		};
@@ -9794,7 +9794,7 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 	// way to register. Lowercase jquery is used because AMD module names are
 	// derived from file names, and jQuery is normally delivered in a lowercase
 	// file name. Do this after creating the global so that if an AMD module wants
-	// to call noConflict to hide this version of jQuery, it will work.
+	// to call noConflict to hMembershipIde this version of jQuery, it will work.
 	if ( typeof define === "function" && define.amd ) {
 		define( "jquery", [], function () { return jQuery; } );
 	}

@@ -316,7 +316,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     this.$indicators = this.$element.find('.carousel-indicators')
     this.options     = options
     this.paused      =
-    this.sliding     =
+    this.slMembershipIding     =
     this.interval    =
     this.$active     =
     this.$items      = null
@@ -357,10 +357,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     if (pos > (this.$items.length - 1) || pos < 0) return
 
-    if (this.sliding)       return this.$element.one('slid', function () { that.to(pos) })
+    if (this.slMembershipIding)       return this.$element.one('slMembershipId', function () { that.to(pos) })
     if (activeIndex == pos) return this.pause().cycle()
 
-    return this.slide(pos > activeIndex ? 'next' : 'prev', $(this.$items[pos]))
+    return this.slMembershipIde(pos > activeIndex ? 'next' : 'prev', $(this.$items[pos]))
   }
 
   Carousel.prototype.pause = function (e) {
@@ -377,16 +377,16 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
   Carousel.prototype.next = function () {
-    if (this.sliding) return
-    return this.slide('next')
+    if (this.slMembershipIding) return
+    return this.slMembershipIde('next')
   }
 
   Carousel.prototype.prev = function () {
-    if (this.sliding) return
-    return this.slide('prev')
+    if (this.slMembershipIding) return
+    return this.slMembershipIde('prev')
   }
 
-  Carousel.prototype.slide = function (type, next) {
+  Carousel.prototype.slMembershipIde = function (type, next) {
     var $active   = this.$element.find('.item.active')
     var $next     = next || $active[type]()
     var isCycling = this.interval
@@ -399,35 +399,35 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       $next = this.$element.find('.item')[fallback]()
     }
 
-    this.sliding = true
+    this.slMembershipIding = true
 
     isCycling && this.pause()
 
-    var e = $.Event('slide.bs.carousel', { relatedTarget: $next[0], direction: direction })
+    var e = $.Event('slMembershipIde.bs.carousel', { relatedTarget: $next[0], direction: direction })
 
     if ($next.hasClass('active')) return
 
     if (this.$indicators.length) {
       this.$indicators.find('.active').removeClass('active')
-      this.$element.one('slid', function () {
+      this.$element.one('slMembershipId', function () {
         var $nextIndicator = $(that.$indicators.children()[that.getActiveIndex()])
         $nextIndicator && $nextIndicator.addClass('active')
       })
     }
 
-    if ($.support.transition && this.$element.hasClass('slide')) {
+    if ($.support.transition && this.$element.hasClass('slMembershipIde')) {
       this.$element.trigger(e)
       if (e.isDefaultPrevented()) return
       $next.addClass(type)
-      $next[0].offsetWidth // force reflow
+      $next[0].offsetWMembershipIdth // force reflow
       $active.addClass(direction)
       $next.addClass(direction)
       $active
         .one($.support.transition.end, function () {
           $next.removeClass([type, direction].join(' ')).addClass('active')
           $active.removeClass(['active', direction].join(' '))
-          that.sliding = false
-          setTimeout(function () { that.$element.trigger('slid') }, 0)
+          that.slMembershipIding = false
+          setTimeout(function () { that.$element.trigger('slMembershipId') }, 0)
         })
         .emulateTransitionEnd(600)
     } else {
@@ -435,8 +435,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       if (e.isDefaultPrevented()) return
       $active.removeClass('active')
       $next.addClass('active')
-      this.sliding = false
-      this.$element.trigger('slid')
+      this.slMembershipIding = false
+      this.$element.trigger('slMembershipId')
     }
 
     isCycling && this.cycle()
@@ -455,7 +455,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       var $this   = $(this)
       var data    = $this.data('bs.carousel')
       var options = $.extend({}, Carousel.DEFAULTS, $this.data(), typeof option == 'object' && option)
-      var action  = typeof option == 'string' ? option : options.slide
+      var action  = typeof option == 'string' ? option : options.slMembershipIde
 
       if (!data) $this.data('bs.carousel', (data = new Carousel(this, options)))
       if (typeof option == 'number') data.to(option)
@@ -479,24 +479,24 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   // CAROUSEL DATA-API
   // =================
 
-  $(document).on('click.bs.carousel.data-api', '[data-slide], [data-slide-to]', function (e) {
+  $(document).on('click.bs.carousel.data-api', '[data-slMembershipIde], [data-slMembershipIde-to]', function (e) {
     var $this   = $(this), href
     var $target = $($this.attr('data-target') || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '')) //strip for ie7
     var options = $.extend({}, $target.data(), $this.data())
-    var slideIndex = $this.attr('data-slide-to')
-    if (slideIndex) options.interval = false
+    var slMembershipIdeIndex = $this.attr('data-slMembershipIde-to')
+    if (slMembershipIdeIndex) options.interval = false
 
     $target.carousel(options)
 
-    if (slideIndex = $this.attr('data-slide-to')) {
-      $target.data('bs.carousel').to(slideIndex)
+    if (slMembershipIdeIndex = $this.attr('data-slMembershipIde-to')) {
+      $target.data('bs.carousel').to(slMembershipIdeIndex)
     }
 
     e.preventDefault()
   })
 
   $(window).on('load', function () {
-    $('[data-ride="carousel"]').each(function () {
+    $('[data-rMembershipIde="carousel"]').each(function () {
       var $carousel = $(this)
       $carousel.carousel($carousel.data())
     })
@@ -543,8 +543,8 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
   Collapse.prototype.dimension = function () {
-    var hasWidth = this.$element.hasClass('width')
-    return hasWidth ? 'width' : 'height'
+    var hasWMembershipIdth = this.$element.hasClass('wMembershipIdth')
+    return hasWMembershipIdth ? 'wMembershipIdth' : 'height'
   }
 
   Collapse.prototype.show = function () {
@@ -559,7 +559,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if (actives && actives.length) {
       var hasData = actives.data('bs.collapse')
       if (hasData && hasData.transitioning) return
-      actives.collapse('hide')
+      actives.collapse('hMembershipIde')
       hasData || actives.data('bs.collapse', null)
     }
 
@@ -591,10 +591,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       [dimension](this.$element[0][scrollSize])
   }
 
-  Collapse.prototype.hide = function () {
+  Collapse.prototype.hMembershipIde = function () {
     if (this.transitioning || !this.$element.hasClass('in')) return
 
-    var startEvent = $.Event('hide.bs.collapse')
+    var startEvent = $.Event('hMembershipIde.bs.collapse')
     this.$element.trigger(startEvent)
     if (startEvent.isDefaultPrevented()) return
 
@@ -614,7 +614,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     var complete = function () {
       this.transitioning = 0
       this.$element
-        .trigger('hidden.bs.collapse')
+        .trigger('hMembershipIdden.bs.collapse')
         .removeClass('collapsing')
         .addClass('collapse')
     }
@@ -628,7 +628,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
   Collapse.prototype.toggle = function () {
-    this[this.$element.hasClass('in') ? 'hide' : 'show']()
+    this[this.$element.hasClass('in') ? 'hMembershipIde' : 'show']()
   }
 
 
@@ -763,7 +763,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       return $this.click()
     }
 
-    var $items = $('[role=menu] li:not(.divider):visible a', $parent)
+    var $items = $('[role=menu] li:not(.divMembershipIder):visible a', $parent)
 
     if (!$items.length) return
 
@@ -781,9 +781,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     $(toggle).each(function (e) {
       var $parent = getParent($(this))
       if (!$parent.hasClass('open')) return
-      $parent.trigger(e = $.Event('hide.bs.dropdown'))
+      $parent.trigger(e = $.Event('hMembershipIde.bs.dropdown'))
       if (e.isDefaultPrevented()) return
-      $parent.removeClass('open').trigger('hidden.bs.dropdown')
+      $parent.removeClass('open').trigger('hMembershipIdden.bs.dropdown')
     })
   }
 
@@ -880,7 +880,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
   Modal.prototype.toggle = function (_relatedTarget) {
-    return this[!this.isShown ? 'show' : 'hide'](_relatedTarget)
+    return this[!this.isShown ? 'show' : 'hMembershipIde'](_relatedTarget)
   }
 
   Modal.prototype.show = function (_relatedTarget) {
@@ -895,7 +895,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.escape()
 
-    this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hide, this))
+    this.$element.on('click.dismiss.modal', '[data-dismiss="modal"]', $.proxy(this.hMembershipIde, this))
 
     this.backdrop(function () {
       var transition = $.support.transition && that.$element.hasClass('fade')
@@ -907,19 +907,19 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       that.$element.show()
 
       if (transition) {
-        that.$element[0].offsetWidth // force reflow
+        that.$element[0].offsetWMembershipIdth // force reflow
       }
 
       that.$element
         .addClass('in')
-        .attr('aria-hidden', false)
+        .attr('aria-hMembershipIdden', false)
 
       that.enforceFocus()
 
       var e = $.Event('shown.bs.modal', { relatedTarget: _relatedTarget })
 
       transition ?
-        that.$element.find('.modal-dialog') // wait for modal to slide in
+        that.$element.find('.modal-dialog') // wait for modal to slMembershipIde in
           .one($.support.transition.end, function () {
             that.$element.focus().trigger(e)
           })
@@ -928,10 +928,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     })
   }
 
-  Modal.prototype.hide = function (e) {
+  Modal.prototype.hMembershipIde = function (e) {
     if (e) e.preventDefault()
 
-    e = $.Event('hide.bs.modal')
+    e = $.Event('hMembershipIde.bs.modal')
 
     this.$element.trigger(e)
 
@@ -945,14 +945,14 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     this.$element
       .removeClass('in')
-      .attr('aria-hidden', true)
+      .attr('aria-hMembershipIdden', true)
       .off('click.dismiss.modal')
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
-        .one($.support.transition.end, $.proxy(this.hideModal, this))
+        .one($.support.transition.end, $.proxy(this.hMembershipIdeModal, this))
         .emulateTransitionEnd(300) :
-      this.hideModal()
+      this.hMembershipIdeModal()
   }
 
   Modal.prototype.enforceFocus = function () {
@@ -968,19 +968,19 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   Modal.prototype.escape = function () {
     if (this.isShown && this.options.keyboard) {
       this.$element.on('keyup.dismiss.bs.modal', $.proxy(function (e) {
-        e.which == 27 && this.hide()
+        e.which == 27 && this.hMembershipIde()
       }, this))
     } else if (!this.isShown) {
       this.$element.off('keyup.dismiss.bs.modal')
     }
   }
 
-  Modal.prototype.hideModal = function () {
+  Modal.prototype.hMembershipIdeModal = function () {
     var that = this
-    this.$element.hide()
+    this.$element.hMembershipIde()
     this.backdrop(function () {
       that.removeBackdrop()
-      that.$element.trigger('hidden.bs.modal')
+      that.$element.trigger('hMembershipIdden.bs.modal')
     })
   }
 
@@ -1003,10 +1003,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
         if (e.target !== e.currentTarget) return
         this.options.backdrop == 'static'
           ? this.$element[0].focus.call(this.$element[0])
-          : this.hide.call(this)
+          : this.hMembershipIde.call(this)
       }, this))
 
-      if (doAnimate) this.$backdrop[0].offsetWidth // force reflow
+      if (doAnimate) this.$backdrop[0].offsetWMembershipIdth // force reflow
 
       this.$backdrop.addClass('in')
 
@@ -1075,14 +1075,14 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     $target
       .modal(option, this)
-      .one('hide', function () {
+      .one('hMembershipIde', function () {
         $this.is(':visible') && $this.focus()
       })
   })
 
   $(document)
     .on('show.bs.modal',  '.modal', function () { $(document.body).addClass('modal-open') })
-    .on('hidden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
+    .on('hMembershipIdden.bs.modal', '.modal', function () { $(document.body).removeClass('modal-open') })
 
 }(window.jQuery);
 
@@ -1172,7 +1172,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     if (options.delay && typeof options.delay == 'number') {
       options.delay = {
         show: options.delay
-      , hide: options.delay
+      , hMembershipIde: options.delay
       }
     }
 
@@ -1213,11 +1213,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     self.hoverState = 'out'
 
-    if (!self.options.delay || !self.options.delay.hide) return self.hide()
+    if (!self.options.delay || !self.options.delay.hMembershipIde) return self.hMembershipIde()
 
     self.timeout = setTimeout(function () {
-      if (self.hoverState == 'out') self.hide()
-    }, self.options.delay.hide)
+      if (self.hoverState == 'out') self.hMembershipIde()
+    }, self.options.delay.hMembershipIde)
   }
 
   Tooltip.prototype.show = function () {
@@ -1250,7 +1250,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
 
       var pos          = this.getPosition()
-      var actualWidth  = $tip[0].offsetWidth
+      var actualWMembershipIdth  = $tip[0].offsetWMembershipIdth
       var actualHeight = $tip[0].offsetHeight
 
       if (autoPlace) {
@@ -1258,14 +1258,14 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
         var orgPlacement = placement
         var docScroll    = document.documentElement.scrollTop || document.body.scrollTop
-        var parentWidth  = this.options.container == 'body' ? window.innerWidth  : $parent.outerWidth()
+        var parentWMembershipIdth  = this.options.container == 'body' ? window.innerWMembershipIdth  : $parent.outerWMembershipIdth()
         var parentHeight = this.options.container == 'body' ? window.innerHeight : $parent.outerHeight()
         var parentLeft   = this.options.container == 'body' ? 0 : $parent.offset().left
 
         placement = placement == 'bottom' && pos.top   + pos.height  + actualHeight - docScroll > parentHeight  ? 'top'    :
                     placement == 'top'    && pos.top   - docScroll   - actualHeight < 0                         ? 'bottom' :
-                    placement == 'right'  && pos.right + actualWidth > parentWidth                              ? 'left'   :
-                    placement == 'left'   && pos.left  - actualWidth < parentLeft                               ? 'right'  :
+                    placement == 'right'  && pos.right + actualWMembershipIdth > parentWMembershipIdth                              ? 'left'   :
+                    placement == 'left'   && pos.left  - actualWMembershipIdth < parentLeft                               ? 'right'  :
                     placement
 
         $tip
@@ -1273,7 +1273,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
           .addClass(placement)
       }
 
-      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWidth, actualHeight)
+      var calculatedOffset = this.getCalculatedOffset(placement, pos, actualWMembershipIdth, actualHeight)
 
       this.applyPlacement(calculatedOffset, placement)
       this.$element.trigger('shown.bs.' + this.type)
@@ -1283,7 +1283,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   Tooltip.prototype.applyPlacement = function(offset, placement) {
     var replace
     var $tip   = this.tip()
-    var width  = $tip[0].offsetWidth
+    var wMembershipIdth  = $tip[0].offsetWMembershipIdth
     var height = $tip[0].offsetHeight
 
     // manually read margins because getBoundingClientRect includes difference
@@ -1302,7 +1302,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       .addClass('in')
 
     // check to see if placing tip in new offset caused the tip to resize itself
-    var actualWidth  = $tip[0].offsetWidth
+    var actualWMembershipIdth  = $tip[0].offsetWMembershipIdth
     var actualHeight = $tip[0].offsetHeight
 
     if (placement == 'top' && actualHeight != height) {
@@ -1319,11 +1319,11 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
         $tip.offset(offset)
 
-        actualWidth  = $tip[0].offsetWidth
+        actualWMembershipIdth  = $tip[0].offsetWMembershipIdth
         actualHeight = $tip[0].offsetHeight
       }
 
-      this.replaceArrow(delta - width + actualWidth, actualWidth, 'left')
+      this.replaceArrow(delta - wMembershipIdth + actualWMembershipIdth, actualWMembershipIdth, 'left')
     } else {
       this.replaceArrow(actualHeight - height, actualHeight, 'top')
     }
@@ -1343,10 +1343,10 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     $tip.removeClass('fade in top bottom left right')
   }
 
-  Tooltip.prototype.hide = function () {
+  Tooltip.prototype.hMembershipIde = function () {
     var that = this
     var $tip = this.tip()
-    var e    = $.Event('hide.bs.' + this.type)
+    var e    = $.Event('hMembershipIde.bs.' + this.type)
 
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
@@ -1364,7 +1364,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
         .emulateTransitionEnd(150) :
       complete()
 
-    this.$element.trigger('hidden.bs.' + this.type)
+    this.$element.trigger('hMembershipIdden.bs.' + this.type)
 
     return this
   }
@@ -1383,16 +1383,16 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   Tooltip.prototype.getPosition = function () {
     var el = this.$element[0]
     return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
-      width: el.offsetWidth
+      wMembershipIdth: el.offsetWMembershipIdth
     , height: el.offsetHeight
     }, this.$element.offset())
   }
 
-  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
-    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2  } :
-           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2  } :
-           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
-        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width   }
+  Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWMembershipIdth, actualHeight) {
+    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.wMembershipIdth / 2 - actualWMembershipIdth / 2  } :
+           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.wMembershipIdth / 2 - actualWMembershipIdth / 2  } :
+           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWMembershipIdth } :
+        /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.wMembershipIdth   }
   }
 
   Tooltip.prototype.getTitle = function () {
@@ -1414,9 +1414,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     return this.$arrow = this.$arrow || this.tip().find('.tooltip-arrow')
   }
 
-  Tooltip.prototype.validate = function () {
+  Tooltip.prototype.valMembershipIdate = function () {
     if (!this.$element[0].parentNode) {
-      this.hide()
+      this.hMembershipIde()
       this.$element = null
       this.options  = null
     }
@@ -1440,7 +1440,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
   }
 
   Tooltip.prototype.destroy = function () {
-    this.hide().$element.off('.' + this.type).removeData('bs.' + this.type)
+    this.hMembershipIde().$element.off('.' + this.type).removeData('bs.' + this.type)
   }
 
 
@@ -1533,9 +1533,9 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
     $tip.removeClass('fade top bottom left right in')
 
-    // IE8 doesn't accept hiding via the `:empty` pseudo selector, we have to do
+    // IE8 doesn't accept hMembershipIding via the `:empty` pseudo selector, we have to do
     // this manually by checking the contents.
-    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hide()
+    if (!$tip.find('.popover-title').html()) $tip.find('.popover-title').hMembershipIde()
   }
 
   Popover.prototype.hasContent = function () {
@@ -1826,7 +1826,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
       element.addClass('active')
 
       if (transition) {
-        element[0].offsetWidth // reflow for transition
+        element[0].offsetWMembershipIdth // reflow for transition
         element.addClass('in')
       } else {
         element.removeClass('fade')

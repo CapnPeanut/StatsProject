@@ -13,7 +13,7 @@ namespace StatsProject.Models
 
     public class Participant
     {
-        public int ID { get; set; }
+        public int ParticipantId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         [DataType(DataType.Date)]
