@@ -31,4 +31,10 @@ textarea {
     color: black;
 }
 
+/* Added a border between columns on the home page */
+
+.col-md-10 {
+    border-left: solid;
+}
+
 /*  */
