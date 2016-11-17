@@ -11,16 +11,18 @@ namespace StatsProject.DAL
     {
         protected override void Seed(SchoolContext context)
         {
+            // Seeding the database with initial information
+            //adding gender, wins, and losses columns
             var Participant = new List<Participant>
             {
-            new Participant{FirstName="Carson",LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01"), Gender=Gender.Female},
-            new Participant{FirstName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Male},
-            new Participant{FirstName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01"), Gender= Gender.Male},
-            new Participant{FirstName="Gytis",LastName="Barzdukas",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Female},
-            new Participant{FirstName="Yan",LastName="Li",EnrollmentDate=DateTime.Parse("2002-09-01"), Gender=Gender.Female},
-            new Participant{FirstName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01"), Gender=Gender.Female},
-            new Participant{FirstName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01"), Gender=Gender.Female},
-            new Participant{FirstName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01"), Gender=Gender.Female}
+            new Participant{FirstName="Jim",LastName="Bob",MembershipDate=DateTime.Parse("2005-08-03"), Gender=Gender.Female, NumberOfLosses=0, NumberOfWins=5},
+            new Participant{FirstName="Maggy",LastName="Smith",MembershipDate=DateTime.Parse("2002-05-23"), Gender=Gender.Male, NumberOfLosses=6, NumberOfWins=5},
+            new Participant{FirstName="Frank",LastName="Zulu",MembershipDate=DateTime.Parse("2003-02-24"), Gender= Gender.Male, NumberOfLosses=33, NumberOfWins=2},
+            new Participant{FirstName="Peter",LastName="Dinklage",MembershipDate=DateTime.Parse("2002-10-01"), Gender=Gender.Female, NumberOfLosses=10, NumberOfWins=6},
+            new Participant{FirstName="Yoyo",LastName="Ma",MembershipDate=DateTime.Parse("2002-09-29"), Gender=Gender.Female, NumberOfLosses=20, NumberOfWins=15},
+            new Participant{FirstName="Rob",LastName="Lowe",MembershipDate=DateTime.Parse("2001-02-11"), Gender=Gender.Female, NumberOfLosses=24, NumberOfWins=54},
+            new Participant{FirstName="Marty",LastName="McFly",MembershipDate=DateTime.Parse("2003-03-26"), Gender=Gender.Female, NumberOfLosses=13, NumberOfWins=34},
+            new Participant{FirstName="Joe",LastName="Schmoe",MembershipDate=DateTime.Parse("2005-12-07"), Gender=Gender.Female, NumberOfLosses=23, NumberOfWins=25}
             };
 
             Participant.ForEach(s => context.Participant.Add(s));

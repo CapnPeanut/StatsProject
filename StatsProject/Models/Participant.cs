@@ -18,7 +18,7 @@ namespace StatsProject.Models
         public string FirstName { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM-dd-yyyy}", ApplyFormatInEditMode =true)]
-        public DateTime EnrollmentDate { get; set; }
+        public DateTime MembershipDate { get; set; }
         public Gender Gender { get; set; }
 //      public Outcome? Outcome { get; set; }
         public int NumberOfWins { get; set; }

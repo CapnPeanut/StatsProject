@@ -12,23 +12,34 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @*@Html.DisplayNameFor(model => model.FirstName)*@
+            @*Beginning to future proof for name link in the future*@
+            First Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-
-        <th>
-            @Html.DisplayNameFor(model => model.EnrollmentDate)
+            @*@Html.DisplayNameFor(model => model.LastName)*@
+            @*Beginning to future proof for name link in the future*@
+            Last Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Gender)
+            @*@Html.DisplayNameFor(model => model.MembershipDate)*@
+            @*Beginning to future proof for membership date link in the future*@
+            Membership Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumberOfWins)
+            @*@Html.DisplayNameFor(model => model.Gender)*@
+            @*Beginning to future proof for gender link in the future*@
+            Gender
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumberOfLosses)
+            @*@Html.DisplayNameFor(model => model.NumberOfWins)*@
+            @*Beginning to future proof for wins link in the future*@
+            Number Of Wins
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.NumberOfLosses)*@
+            @*Beginning to future proof for losses link in the future*@
+            Number Of Losses
         </th>
         <th></th>
     </tr>
@@ -42,7 +53,7 @@
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            @Html.DisplayFor(modelItem => item.MembershipDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Gender)
