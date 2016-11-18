@@ -1,6 +1,8 @@
 My Code Louisville Project C#/.NET Project.  A Web app for users to create their own database for statistics regarding 
 games/activities they play.
 
+Per our Tuesday night mentor: Make sure all Nuget Packages are restored correctly before running the program.
+
 Simply download and run the website.  Directions are stated on the side in the "Get Started" panel.  The homepage and about section explain
 the website.  My current goal was to get a working database considering the short time frame we have for Code Louisville and the lack of a
 few Treehouse classes that would have helped.  I intend to expand on this in the future and have already put some future proofing code 
